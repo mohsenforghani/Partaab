@@ -1221,27 +1221,25 @@ updateBallLabel(ball)
     requestAnimationFrame(gameLoop);
 }
 if(checkInternetAtStart()){
-    gameLoop(); // ادامه بازی
+    
   // بررسی اینکه قبلاً دانلود شده
   if (localStorage.getItem('downloaded') === 'true') {
     btn.style.display = 'none';
-    startGame(); // شروع بازی بدون نمایش دکمه
+    gameLoop(); // ادامه بازی
   }
 
   btn.addEventListener('click', (e) => {
     e.preventDefault();
     localStorage.setItem('downloaded', 'true'); // علامت دانلود شده
     btn.style.display = 'none';
-    startGame(); // شروع بازی
+    gameLoop(); // ادامه بازی
   });
 
 } else {
     gameLoop(); // ادامه بازی
 }
 
-
-
-
 </script>
 </body>
 </html>
+
