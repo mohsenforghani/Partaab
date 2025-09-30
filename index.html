@@ -32,7 +32,19 @@ body { margin:0; overflow:hidden; background:#222; touch-action:none; font-famil
   display: none; /* پنهان در ابتدا */
 }
 
-
+#downloadBtn {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px 40px;
+  font-size: 24px;
+  cursor: pointer;
+  border: none;
+  border-radius: 12px;
+  background-color: #28a745;
+  color: white;
+}
 
 
 #showScoresBtn {
@@ -509,7 +521,7 @@ canvas { display:block;}
 <button id="resetBtn">شروع مجدد</button>
 <button id="showScoresBtn">نمایش امتیازات</button>
 <canvas id="gameCanvas"></canvas>
-
+<button id="downloadBtn">دانلود و شروع بازی</button>
 
 
 
@@ -546,7 +558,7 @@ canvas { display:block;}
 <script>
 const canvas = document.getElementById('gameCanvas');
 const ballLabel = document.getElementById("ballLabel");
-
+ const btn = document.getElementById('downloadBtn');
 
 
 const ctx = canvas.getContext('2d');
@@ -1199,6 +1211,7 @@ function drawFloats(){
 
 // Game loop
 function gameLoop(){
+
     update();
 updateBallLabel(ball)
     draw();
@@ -1206,6 +1219,19 @@ updateBallLabel(ball)
 }
 if(checkInternetAtStart()){
     gameLoop(); // ادامه بازی
+  // بررسی اینکه قبلاً دانلود شده
+  if (localStorage.getItem('downloaded') === 'true') {
+    btn.style.display = 'none';
+    startGame(); // شروع بازی بدون نمایش دکمه
+  }
+
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    localStorage.setItem('downloaded', 'true'); // علامت دانلود شده
+    btn.style.display = 'none';
+    startGame(); // شروع بازی
+  });
+
 } else {
     gameLoop(); // ادامه بازی
 }
