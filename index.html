@@ -1209,6 +1209,17 @@ function drawFloats(){
     ctx.globalAlpha = 1;
 }
 
+if (localStorage.getItem('downloaded') === 'true') {
+    btn.style.display = 'none';
+    gameLoop(); // ادامه بازی
+  }
+
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    localStorage.setItem('downloaded', 'true'); // علامت دانلود شده
+    btn.style.display = 'none';
+    gameLoop(); // ادامه بازی
+  });
 
 
 
@@ -1221,20 +1232,9 @@ updateBallLabel(ball)
     requestAnimationFrame(gameLoop);
 }
 if(checkInternetAtStart()){
-    
+    gameLoop(); // ادامه بازی
   // بررسی اینکه قبلاً دانلود شده
-  if (localStorage.getItem('downloaded') === 'true') {
-    btn.style.display = 'none';
-    gameLoop(); // ادامه بازی
-  }
-
-  btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    localStorage.setItem('downloaded', 'true'); // علامت دانلود شده
-    btn.style.display = 'none';
-    gameLoop(); // ادامه بازی
-  });
-
+  
 } else {
     gameLoop(); // ادامه بازی
 }
@@ -1242,4 +1242,5 @@ if(checkInternetAtStart()){
 </script>
 </body>
 </html>
+
 
