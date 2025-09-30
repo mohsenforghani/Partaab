@@ -104,45 +104,6 @@ body { margin:0; overflow:hidden; background:#222; touch-action:none; font-famil
 }
 
 
- #downloadBtn {
-    display: block;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 25px 50px; /* بزرگتر شدن دکمه */
-    font-size: 24px;    /* متن بزرگتر */
-    background-color: #4CAF50; /* رنگ سبز جذاب */
-    color: white;
-    border: none;
-    border-radius: 12px; /* گوشه‌های گرد */
-    cursor: pointer;
-    text-align: center;
-    z-index: 9999;
-    text-decoration: none;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* کمی سایه برای جذابیت */
-    transition: transform 0.2s, background-color 0.2s; /* افکت hover */
-}
-
-#downloadBtn:hover {
-    background-color: #45a049;
-    transform: translate(-50%, -50%) scale(1.05); /* کمی بزرگ‌تر هنگام هاور */
-}
-
-
- #alreadyDownloaded {
-    display: none;
-    position: fixed;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 20px;
-    color: red;
-  }
-
-
-
-
 
 #chatBox {
     position: absolute; /* برای استفاده از z-index باید position تعریف شود */
@@ -548,11 +509,7 @@ canvas { display:block;}
 <button id="resetBtn">شروع مجدد</button>
 <button id="showScoresBtn">نمایش امتیازات</button>
 <canvas id="gameCanvas"></canvas>
-<!-- دکمه دانلود -->
-<a id="downloadBtn" href="https://mohsenforghani.github.io/Partaab/index.html" download="PartaabGame.html">
-    دانلود بازی
-</a>
-<div id="alreadyDownloaded">قبلا فایل را دانلود کرده ام</div>
+
 
 
 
@@ -1242,26 +1199,10 @@ function drawFloats(){
 
 // Game loop
 function gameLoop(){
- 
-
     update();
 updateBallLabel(ball)
     draw();
     requestAnimationFrame(gameLoop);
- // بررسی اگر کاربر قبلاً دانلود کرده
-    const downloaded = localStorage.getItem('gameDownloaded');
-    if(!downloaded){
-        // نمایش دکمه دانلود
-        const btn = document.getElementById('downloadBtn');
-        btn.style.display = 'block';
-
-        // وقتی کاربر کلیک کرد، علامت دانلود را ذخیره کن
-        btn.addEventListener('click', () => {
-            localStorage.setItem('gameDownloaded', 'true');
-            btn.style.display = 'none'; // دکمه مخفی شود بعد از دانلود
-        });
-    }
-
 }
 if(checkInternetAtStart()){
     gameLoop(); // ادامه بازی
