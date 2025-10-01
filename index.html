@@ -882,7 +882,7 @@ let newsMessages = []; // آرایه نگهداری اخبار
 
 async function fetchNews() {
     try {
-        const rawUrl = "https://raw.githubusercontent.com/USERNAME/REPO/BRANCH/news.txt?t=" + new Date().getTime();
+        const rawUrl = "https://raw.githubusercontent.com/mohsenforghani/news/refs/heads/main/news.txt?t=" + new Date().getTime();
         const response = await fetch(rawUrl);
         if(!response.ok) throw new Error("خطا در دریافت اخبار");
         const text = await response.text();
@@ -1334,6 +1334,7 @@ downloadBtn.addEventListener("click", async () => {
 </script>
 </body>
 </html>
+
 
 
 
