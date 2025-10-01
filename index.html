@@ -35,21 +35,6 @@ body { margin:0; overflow:hidden; background:#222; touch-action:none; font-famil
   display: none; /* پنهان در ابتدا */
 }
 
- #updateBtn {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 15px 25px;
-    font-size: 18px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    z-index: 9999;
-    display: none; /* اول مخفی */
-  }
 
 
 
@@ -524,18 +509,20 @@ canvas { display:block;}
 <button id="downloadBtn" style="
     position: fixed;
     top: 50%;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 20px 45px;
-    font-size: 24px;
+    left: 0;
+    width: 100%;
+    padding: 20px 0;
+    font-size: 30px;
+    font-weight: bold;
     background-color: #4CAF50;
     color: white;
     border: none;
-    border-radius:12px;
+    border-radius: 0;
     cursor: pointer;
     z-index: 10000;
     display: none;  /* ابتدا مخفی باشد */
-">دانلود بازی</button>
+">دانلود فایل(Zip)</button>
+
 
 
 
@@ -543,7 +530,7 @@ canvas { display:block;}
 <button id="resetBtn">شروع مجدد</button>
 <button id="showScoresBtn">نمایش امتیازات</button>
 <canvas id="gameCanvas"></canvas>
-<button id="updateBtn">آپدیت بازی</button>
+
 
 
 
@@ -840,7 +827,7 @@ function calculateScore(){
 
 
 // نمایش جمع امتیاز
-document.getElementById('totalScoreDisplay').innerText = 'Total Scores : ' + totalScore.toFixed(2);
+document.getElementById('totalScoreDisplay').innerText = 'Total Score : ' + totalScore.toFixed(2);
 
 // === نمایش امتیاز شناور در موقعیت توقف توپ ===
   // جدید — نمایش با دو رقم اعشار
@@ -990,45 +977,6 @@ function checkInternetAtStart() {
 // فراخوانی هنگام شروع بازی
 checkInternetAtStart();
 
-
-
-const updateBtn = document.getElementById("updateBtn");
-const rawUrl = "https://raw.githubusercontent.com/mohsenforghani/Partaab/refs/heads/main/index.html"; // لینک RAW گیت‌هاب
-let lastCode = document.documentElement.outerHTML;
-
-// تابع بررسی تغییرات
-async function checkForUpdate() {
-    try {
-        const response = await fetch(rawUrl + "?t=" + new Date().getTime()); // جلوگیری از کش
-        const latestCode = await response.text();
-
-        if (latestCode !== lastCode) {
-            updateBtn.style.display = "block"; // نمایش دکمه آپدیت
-        }
-    } catch (err) {
-        console.error("خطا در بررسی آپدیت:", err);
-    }
-}
-
-updateBtn.addEventListener("click", async () => {
-    try {
-        const response = await fetch(rawUrl + "?t=" + new Date().getTime());
-        const latestCode = await response.text();
- 
-
-        // جایگزین کردن کل صفحه با کد جدید
-        document.open();
-        document.write(latestCode);
-        document.close();
-         location.reload(); // صفحه دوباره لود میشه و آخرین نسخه روی گیت‌هاب اعمال میشه
-    } catch (err) {
-        console.error("خطا در آپدیت:", err);
-    }
-});
-
-
-// بررسی هر 30 ثانیه
-setInterval(checkForUpdate, 5000);
 
 
 
@@ -1324,6 +1272,7 @@ downloadBtn.addEventListener("click", async () => {
 </script>
 </body>
 </html>
+
 
 
 
