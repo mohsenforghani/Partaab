@@ -592,7 +592,7 @@ function resizeCanvas(){
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     ball.x = canvas.width/2;
-    ball.y = canvas.height - 50;
+    ball.y = canvas.height - 65;
 }
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
@@ -860,7 +860,7 @@ spawnFloat(displayText, fx, fy);
 
 function resetBall(){
     ball.x = canvas.width/2;
-    ball.y = canvas.height-50;
+    ball.y = canvas.height-65;
     ball.vx = 0;
     ball.vy = 0;
     ball.color = 'white';
