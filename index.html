@@ -884,7 +884,7 @@ let newsMessages = []; // آرایه نگهداری اخبار
 
 async function fetchNews() {
     try {
-        const rawUrl = "https://raw.githubusercontent.com/USERNAME/REPO/BRANCH/news.txt?t=" + new Date().getTime();
+        const rawUrl = "https://raw.githubusercontent.com/mohsenforghani/news/refs/heads/main/news.txt?t=" + new Date().getTime();
         const response = await fetch(rawUrl);
         if(!response.ok) throw new Error("خطا در دریافت اخبار");
         const text = await response.text();
@@ -931,10 +931,18 @@ function showNewsTicker() {
 
 
 
-setInterval(() => {
-    showNewsTicker();
-}, 5000); // هر 5 ثانیه یک خبر جدید نمایش داده می‌شود
-
+setInterval(async () => {
+    try {
+        const response = await fetch("https://raw.githubusercontent.com/mohsenforghani/news/refs/heads/main/news.txt?t=" + new Date().getTime());
+        const latestNews = await response.text();
+        if(latestNews !== currentNews){
+            currentNews = latestNews;
+            showNewsTicker(currentNews);
+        }
+    } catch(err){
+        console.error(err);
+    }
+}, 5000); // هر 5 ثانیه چک می‌شود
 
 
 
@@ -1337,6 +1345,7 @@ downloadBtn.addEventListener("click", async () => {
 </script>
 </body>
 </html>
+
 
 
 
