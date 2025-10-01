@@ -586,7 +586,7 @@ const ctx = canvas.getContext('2d');
 
 let playerName = prompt("نام بازیکن را وارد کنید:");
 if(!playerName) playerName = "ناشناس";
-
+let currentNews = "";
 let totalScore = 0;
 let turn = 0;
 const maxTurns = 5;
@@ -900,34 +900,40 @@ setInterval(fetchNews, 30000);
 
     
     
-function showNewsTicker() {
-    if(newsMessages.length === 0) return;
-
-    const ticker = document.getElementById("newsTicker");
-    let currentMessage = newsMessages.shift(); // اولین خبر
-    newsMessages.push(currentMessage); // دوباره به انتها می‌فرستیم
-
-    ticker.innerText = currentMessage;
-    ticker.style.left = "100%";
-
-    let count = 0; // تعداد عبورها
-    const speed = 1; // سرعت حرکت پیکسل بر فریم
-    const totalPasses = 2;
-
-    function animate() {
-        const left = parseFloat(ticker.style.left);
-        ticker.style.left = (left - speed) + "px";
-
-        if(left + ticker.offsetWidth < 0){
-            count++;
-            if(count >= totalPasses) return;
-            ticker.style.left = "100%";
-        }
-        requestAnimationFrame(animate);
+function showNewsTicker(text) {
+    // ایجاد عنصر ticker یا گرفتن المان موجود
+    let ticker = document.getElementById('newsTicker');
+    if(!ticker){
+        ticker = document.createElement('div');
+        ticker.id = 'newsTicker';
+        ticker.style.position = 'absolute';
+        ticker.style.bottom = '5px';
+        ticker.style.left = '100%'; // شروع از راست صفحه
+        ticker.style.whiteSpace = 'nowrap';
+        ticker.style.fontSize = '9px';
+        ticker.style.color = 'red';
+        ticker.style.zIndex = 9999;
+        document.body.appendChild(ticker);
     }
-
-    animate();
+    ticker.innerText = text;
+    
+    // انیمیشن عبور دو بار
+    ticker.style.transition = 'none';
+    ticker.style.left = '100%';
+    void ticker.offsetWidth; // force reflow
+    ticker.style.transition = 'left 15s linear';
+    ticker.style.left = '-' + ticker.offsetWidth + 'px';
+    
+    // repeat دوبار
+    setTimeout(() => {
+        ticker.style.transition = 'none';
+        ticker.style.left = '100%';
+        void ticker.offsetWidth;
+        ticker.style.transition = 'left 15s linear';
+        ticker.style.left = '-' + ticker.offsetWidth + 'px';
+    }, 15000); 
 }
+
 
 
 
@@ -940,10 +946,11 @@ setInterval(async () => {
             showNewsTicker(currentNews);
         }
     } catch(err){
-        console.error(err);
+        console.error("خطا در دریافت news:", err);
     }
-}, 5000); // هر 5 ثانیه چک می‌شود
+}, 5000); // هر 5 ثانیه چک شود
 
+setInterval(fetchNews, 5000);
 
 
 function draw(){
@@ -1345,6 +1352,7 @@ downloadBtn.addEventListener("click", async () => {
 </script>
 </body>
 </html>
+
 
 
 
