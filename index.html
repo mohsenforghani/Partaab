@@ -530,6 +530,16 @@ canvas { display:block;}
 <button id="resetBtn">شروع مجدد</button>
 <button id="showScoresBtn">نمایش امتیازات</button>
 <canvas id="gameCanvas"></canvas>
+<div id="newsTicker" style="
+    position: absolute;
+    bottom: 10px;          /* پایین صفحه */
+    left: 100%;            /* شروع از خارج سمت راست */
+    white-space: nowrap;    /* جلوگیری از شکستن خط */
+    font-size: 9px;         /* فونت ریز */
+    color: red;             /* رنگ قرمز */
+    font-family: Arial,sans-serif;
+    z-index: 9999;          /* بالاتر از عناصر بازی */
+"></div>
 
 
 
@@ -865,10 +875,52 @@ function resetBall(){
     ball.vy = 0;
     ball.color = 'white';
     ball.scored = false;
-
-
 }
 
+async function fetchNews() {
+    try {
+        const rawUrl = "https://raw.githubusercontent.com/mohsenforghani/news/refs/heads/main/news.txt?t=" + new Date().getTime();
+        const response = await fetch(rawUrl);
+        if(!response.ok) throw new Error("خطا در دریافت اخبار");
+        const text = await response.text();
+        const messages = text.split("\n").filter(line => line.trim() !== "");
+        // نمایش اولین پیام
+        if(messages.length > 0) showNewsTicker(messages[0]);
+    } catch(err) {
+        console.error("اخبار بارگذاری نشد:", err);
+    }
+}
+
+fetchNews();             // بارگذاری اولیه
+setInterval(fetchNews, 5000); // هر 30 ثانیه بررسی اخبار جدید
+
+
+    
+    
+function showNewsTicker(message) {
+    const ticker = document.getElementById("newsTicker");
+    ticker.innerText = message;
+    ticker.style.left = "100%"; // شروع از خارج صفحه
+
+    let passes = 0;
+    const totalPasses = 2; // تعداد عبور از صفحه
+    const speed = 1;       // پیکسل در فریم
+
+    function animate() {
+        const left = parseFloat(ticker.style.left);
+        ticker.style.left = (left - speed) + "px";
+
+        // اگر کل متن از صفحه خارج شد
+        if(left + ticker.offsetWidth < 0){
+            passes++;
+            if(passes >= totalPasses) return; // بعد از دو بار متوقف می‌شود
+            ticker.style.left = "100%";       // دوباره از راست شروع می‌کند
+        }
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+}
 
 
 
