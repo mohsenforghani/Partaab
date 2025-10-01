@@ -531,14 +531,14 @@ canvas { display:block;}
 <button id="showScoresBtn">نمایش امتیازات</button>
 <canvas id="gameCanvas"></canvas>
 <div id="newsTicker" style="
-    position: absolute;
-    bottom: 10px;          /* پایین صفحه */
-    left: 100%;            /* شروع از خارج سمت راست */
-    white-space: nowrap;    /* جلوگیری از شکستن خط */
-    font-size: 9px;         /* فونت ریز */
-    color: red;             /* رنگ قرمز */
-    font-family: Arial,sans-serif;
-    z-index: 9999;          /* بالاتر از عناصر بازی */
+     position: absolute;
+    bottom: 10px;
+    left: 100%;
+    white-space: nowrap;
+    font-size: 9px;
+    color: red;
+    font-family: Arial, sans-serif;
+    z-index: 9999;
 "></div>
 
 
@@ -900,21 +900,21 @@ setInterval(fetchNews, 12000); // هر 30 ثانیه بررسی اخبار جد�
 function showNewsTicker(message) {
     const ticker = document.getElementById("newsTicker");
     ticker.innerText = message;
-    ticker.style.left = "100%"; // شروع از خارج صفحه
+    // قرار دادن خارج صفحه
+    ticker.style.left = window.innerWidth + "px"; 
 
     let passes = 0;
-    const totalPasses = 2; // تعداد عبور از صفحه
-    const speed = 1;       // پیکسل در فریم
+    const totalPasses = 2;
+    const speed = 1;
 
     function animate() {
-        const left = parseFloat(ticker.style.left);
+        let left = parseFloat(ticker.style.left);
         ticker.style.left = (left - speed) + "px";
 
-        // اگر کل متن از صفحه خارج شد
         if(left + ticker.offsetWidth < 0){
             passes++;
-            if(passes >= totalPasses) return; // بعد از دو بار متوقف می‌شود
-            ticker.style.left = "100%";       // دوباره از راست شروع می‌کند
+            if(passes >= totalPasses) return;
+            ticker.style.left = window.innerWidth + "px"; // دوباره از راست
         }
         requestAnimationFrame(animate);
     }
@@ -1324,6 +1324,7 @@ downloadBtn.addEventListener("click", async () => {
 </script>
 </body>
 </html>
+
 
 
 
