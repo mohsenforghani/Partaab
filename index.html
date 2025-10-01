@@ -532,13 +532,13 @@ canvas { display:block;}
 <canvas id="gameCanvas"></canvas>
 
     
-    <div id="newsTicker" style="
-     position: absolute;
-    bottom: 10px;
-    left: 100%;
+   <div id="newsTicker" style="
+    position: absolute;
+    bottom: 10px; 
+    left: 100%; /* شروع از خارج صفحه */
     white-space: nowrap;
-    font-size: 9px;
-    color: red;
+    font-size: 9px; 
+    color: red; 
     font-family: Arial, sans-serif;
     z-index: 9999;
 "></div>
@@ -884,7 +884,7 @@ let newsMessages = []; // آرایه نگهداری اخبار
 
 async function fetchNews() {
     try {
-        const rawUrl = "https://raw.githubusercontent.com/mohsenforghani/news/refs/heads/main/news.txt?t=" + new Date().getTime();
+        const rawUrl = "https://raw.githubusercontent.com/USERNAME/REPO/BRANCH/news.txt?t=" + new Date().getTime();
         const response = await fetch(rawUrl);
         if(!response.ok) throw new Error("خطا در دریافت اخبار");
         const text = await response.text();
@@ -896,8 +896,7 @@ async function fetchNews() {
 
 // فراخوانی اولیه و سپس هر 30 ثانیه
 fetchNews();
-setInterval(fetchNews, 5000);
-
+setInterval(fetchNews, 30000);
 
     
     
@@ -929,6 +928,8 @@ function showNewsTicker() {
 
     animate();
 }
+
+
 
 setInterval(() => {
     showNewsTicker();
@@ -1336,6 +1337,7 @@ downloadBtn.addEventListener("click", async () => {
 </script>
 </body>
 </html>
+
 
 
 
