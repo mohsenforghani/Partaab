@@ -877,50 +877,60 @@ function resetBall(){
     ball.scored = false;
 }
 
+    
+let newsMessages = []; // آرایه نگهداری اخبار
+
 async function fetchNews() {
     try {
-        const rawUrl = "https://raw.githubusercontent.com/mohsenforghani/news/refs/heads/main/news.txt?t=" + new Date().getTime();
+        const rawUrl = "https://raw.githubusercontent.com/USERNAME/REPO/BRANCH/news.txt?t=" + new Date().getTime();
         const response = await fetch(rawUrl);
         if(!response.ok) throw new Error("خطا در دریافت اخبار");
         const text = await response.text();
-        const messages = text.split("\n").filter(line => line.trim() !== "");
-        // نمایش اولین پیام
-        if(messages.length > 0) showNewsTicker(messages[0]);
-    } catch(err) {
+        newsMessages = text.split("\n").filter(line => line.trim() !== "");
+    } catch (err) {
         console.error("اخبار بارگذاری نشد:", err);
     }
 }
 
-fetchNews();             // بارگذاری اولیه
-setInterval(fetchNews, 12000); // هر 30 ثانیه بررسی اخبار جدید
+// فراخوانی اولیه و سپس هر 30 ثانیه
+fetchNews();
+setInterval(fetchNews, 30000);
 
 
     
     
-function showNewsTicker(message) {
+function showNewsTicker() {
+    if(newsMessages.length === 0) return;
+
     const ticker = document.getElementById("newsTicker");
-    ticker.innerText = message;
-    // قرار دادن خارج صفحه
-    ticker.style.left = window.innerWidth + "px"; 
+    let currentMessage = newsMessages.shift(); // اولین خبر
+    newsMessages.push(currentMessage); // دوباره به انتها می‌فرستیم
 
-    let passes = 0;
+    ticker.innerText = currentMessage;
+    ticker.style.left = "100%";
+
+    let count = 0; // تعداد عبورها
+    const speed = 1; // سرعت حرکت پیکسل بر فریم
     const totalPasses = 2;
-    const speed = 1;
 
     function animate() {
-        let left = parseFloat(ticker.style.left);
+        const left = parseFloat(ticker.style.left);
         ticker.style.left = (left - speed) + "px";
 
         if(left + ticker.offsetWidth < 0){
-            passes++;
-            if(passes >= totalPasses) return;
-            ticker.style.left = window.innerWidth + "px"; // دوباره از راست
+            count++;
+            if(count >= totalPasses) return;
+            ticker.style.left = "100%";
         }
         requestAnimationFrame(animate);
     }
 
     animate();
 }
+
+setInterval(() => {
+    showNewsTicker();
+}, 5000); // هر 5 ثانیه یک خبر جدید نمایش داده می‌شود
 
 
 
@@ -1324,6 +1334,7 @@ downloadBtn.addEventListener("click", async () => {
 </script>
 </body>
 </html>
+
 
 
 
