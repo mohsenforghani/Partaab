@@ -1014,12 +1014,14 @@ updateBtn.addEventListener("click", async () => {
     try {
         const response = await fetch(rawUrl + "?t=" + new Date().getTime());
         const latestCode = await response.text();
- location.reload(); // صفحه دوباره لود میشه و آخرین نسخه روی گیت‌هاب اعمال میشه
+ 
 
         // جایگزین کردن کل صفحه با کد جدید
         document.open();
         document.write(latestCode);
+         location.reload(); // صفحه دوباره لود میشه و آخرین نسخه روی گیت‌هاب اعمال میشه
         document.close();
+         location.reload(); // صفحه دوباره لود میشه و آخرین نسخه روی گیت‌هاب اعمال میشه
     } catch (err) {
         console.error("خطا در آپدیت:", err);
     }
@@ -1323,4 +1325,5 @@ downloadBtn.addEventListener("click", async () => {
 </script>
 </body>
 </html>
+
 
