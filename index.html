@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
 <title>بازی پرتاب آتشین </title>
 <style>
 body { margin:0; overflow:hidden; background:#222; touch-action:none; font-family:Arial,sans-serif; color:white;}
@@ -32,19 +35,7 @@ body { margin:0; overflow:hidden; background:#222; touch-action:none; font-famil
   display: none; /* پنهان در ابتدا */
 }
 
-#downloadBtn {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 20px 40px;
-  font-size: 24px;
-  cursor: pointer;
-  border: none;
-  border-radius: 12px;
-  background-color: #28a745;
-  color: white;
-}
+
 
 
 #showScoresBtn {
@@ -515,20 +506,31 @@ canvas { display:block;}
 "></div>
 
 
+<button id="downloadBtn" style="
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 20px 45px;
+    font-size: 24px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius:12px;
+    cursor: pointer;
+    z-index: 10000;
+    display: none;  /* ابتدا مخفی باشد */
+">دانلود بازی</button>
+
 
 
 
 <button id="resetBtn">شروع مجدد</button>
 <button id="showScoresBtn">نمایش امتیازات</button>
 <canvas id="gameCanvas"></canvas>
-<!-- دکمه دانلود -->
 
 
-<a id="downloadBtn" 
-   href="https://mohsenforghani.github.io/Partaab/index.html" 
-   download="PartaabGame.html">
-   دانلود بازی
-</a>
+
 
 
 <!-- دکمه دائمی کوچک -->
@@ -563,7 +565,7 @@ canvas { display:block;}
 <script>
 const canvas = document.getElementById('gameCanvas');
 const ballLabel = document.getElementById("ballLabel");
- const btn = document.getElementById('downloadBtn');
+
 
 
 const ctx = canvas.getContext('2d');
@@ -1211,39 +1213,60 @@ function drawFloats(){
     ctx.globalAlpha = 1;
 }
 
-if (localStorage.getItem('downloaded') === 'true') {
-    btn.style.display = 'none';
-    gameLoop(); // ادامه بازی
-  }
-
-  btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    localStorage.setItem('downloaded', 'true'); // علامت دانلود شده
-    btn.style.display = 'none';
-    gameLoop(); // ادامه بازی
-  });
 
 
 
 // Game loop
 function gameLoop(){
-
     update();
 updateBallLabel(ball)
     draw();
     requestAnimationFrame(gameLoop);
 }
 if(checkInternetAtStart()){
+
+
+const downloadBtn = document.getElementById("downloadBtn");
+
+// چک کردن اگر قبلاً دانلود شده باشد
+if(localStorage.getItem("downloaded")) {
+    downloadBtn.style.display = "none";
+} else {
+    downloadBtn.style.display = "block";
+}
+
+downloadBtn.addEventListener("click", async () => {
+    // ایجاد ZIP و اضافه کردن کل صفحه HTML
+    const zip = new JSZip();
+    zip.file("PartaabGame.html", document.documentElement.outerHTML);
+
+    const content = await zip.generateAsync({type:"blob"});
+
+    // ایجاد لینک دانلود و کلیک اتوماتیک
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(content);
+    a.download = "PartaabGame.zip";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+
+    // ذخیره وضعیت دانلود و مخفی کردن دکمه
+    localStorage.setItem("downloaded", "true");
+    downloadBtn.style.display = "none";
+});
+
+
+
+
+
     gameLoop(); // ادامه بازی
-  // بررسی اینکه قبلاً دانلود شده
-  
 } else {
     gameLoop(); // ادامه بازی
 }
 
+
+
+
 </script>
 </body>
 </html>
-
-
-
