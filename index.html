@@ -601,10 +601,11 @@ function resizeCanvas(){
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     ball.x = canvas.width/2;
-    ball.y = canvas.height - 60;
+    ball.y = canvas.height - 75;
 }
-window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
 
 
 
@@ -659,13 +660,22 @@ function drawScoreScale(){
 
 
 // Touch events
-function getTouchPos(e){
+function getTouchPos(e) {
     const rect = canvas.getBoundingClientRect();
+    let x, y;
+    if(e.touches) {  // موبایل
+        x = e.touches[0].clientX;
+        y = e.touches[0].clientY;
+    } else {         // ماوس
+        x = e.clientX;
+        y = e.clientY;
+    }
     return {
-x:e.clientX - rect.left, 
-y:e.clientY - rect.top
-};
+        x: (x - rect.left) * (canvas.width / rect.width),
+        y: (y - rect.top) * (canvas.height / rect.height)
+    };
 }
+
 
 canvas.addEventListener('pointerdown', e=>{
     e.preventDefault();
