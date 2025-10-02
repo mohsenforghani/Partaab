@@ -611,48 +611,34 @@ window.addEventListener('resize', resizeCanvas);
 
 
 
-
-
-
-
-
-
 // Scale
-function drawScoreScale() {
-    ctx.save();
+function drawScoreScale(){
+   ctx.save();
     ctx.font = "bold 20px 'Times New Roman'";
-    ctx.textAlign = "right";
+    ctx.textAlign = "left";
     ctx.textBaseline = "middle";
 
-    const time = performance.now() / 1000; // زمان برای انیمیشن
+    for(let s=1; s<=100; s++){
+        let y = canvas.height - (s/100)*canvas.height;
 
-    for (let s = 1; s <= 100; s++) {
-        let y = canvas.height - (s / 100) * canvas.height;
-
-        if (s % 10 === 0) {
-            // خطوط اصلی
-            ctx.strokeStyle = 'rgba(121,234,195,0.6)';
+        if(s % 10 === 0){  
+            // خطوط اصلی: آبی و خط‌چین
+            ctx.strokeStyle = 'rgba(121,234,195,0.6)'; // آبی نیمه‌شفاف
             ctx.lineWidth = 2;
-            //ctx.setLineDash([10, 8]);
+            ctx.setLineDash([10, 8]); 
             ctx.beginPath();
             ctx.moveTo(0, y);
             ctx.lineTo(canvas.width, y);
             ctx.stroke();
-            ctx.setLineDash([]);
+            ctx.setLineDash([]); 
 
-            // Glow طلایی
-            ctx.shadowColor = 'rgba(255, 223, 0, 0.9)';
-            ctx.shadowBlur = 20 + 10 * Math.sin(time * 3 + s);
-
-            // متن ثابت
-            ctx.fillStyle = 'gold';
+            // نوشتن عدد قرمز
+            ctx.fillStyle = 'yellow';
             ctx.fillText(s, canvas.width - 60, y);
 
-            // پاکسازی Glow برای خطوط بعدی
-            ctx.shadowBlur = 0;
         } else {
-            // خطوط فرعی ساده
-            ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+            // خطوط فرعی: بنفش ساده
+            ctx.strokeStyle = 'rgba(255,255,255,0.2)'; // سفید
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(0, y);
@@ -1367,6 +1353,7 @@ downloadBtn.addEventListener("click", async () => {
 </script>
 </body>
 </html>
+
 
 
 
