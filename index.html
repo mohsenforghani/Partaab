@@ -617,7 +617,7 @@ window.addEventListener('resize', resizeCanvas);
 
 // Scale
 function drawScoreScale(){
-   ctx.save();
+    ctx.save();
     ctx.font = "bold 20px 'Times New Roman'";
     ctx.textAlign = "left";
     ctx.textBaseline = "top";
@@ -639,6 +639,18 @@ function drawScoreScale(){
             // نوشتن عدد زرد
             ctx.fillStyle = 'yellow';
             ctx.fillText(s, canvas.width - 60, y);
+
+            // === خط‌چین قرمز برای 100 ===
+            if(s === 100){
+                ctx.strokeStyle = 'red';
+                ctx.lineWidth = 2;
+                ctx.setLineDash([5, 5]); // الگوی خط‌چین
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
+                ctx.stroke();
+                ctx.setLineDash([]); // بازگرداندن پیش‌فرض
+            }
 
         } else {
             // خطوط فرعی: بنفش ساده
@@ -1357,6 +1369,7 @@ downloadBtn.addEventListener("click", async () => {
 </script>
 </body>
 </html>
+
 
 
 
