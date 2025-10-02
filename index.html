@@ -537,7 +537,7 @@ canvas {
     font-size: 12px; 
     color: yellow; 
     font-family: Arial, sans-serif;
-    z-index: 10001;
+    z-index: 1000;
 "></div>
 
 
@@ -907,11 +907,11 @@ function showNewsTicker(text) {
         ticker = document.createElement('div');
         ticker.id = 'newsTicker';
         ticker.style.position = 'absolute';
-        ticker.style.bottom = '5px';
+        ticker.style.bottom = '62px';
         ticker.style.whiteSpace = 'nowrap';
-        ticker.style.fontSize = '9px';
+        ticker.style.fontSize = '12px';
         ticker.style.color = 'red';
-        ticker.style.zIndex = 9999;
+        ticker.style.zIndex = 1000;
         document.body.appendChild(ticker);
     }
     ticker.innerText = text;
@@ -1353,6 +1353,7 @@ downloadBtn.addEventListener("click", async () => {
 </script>
 </body>
 </html>
+
 
 
 
