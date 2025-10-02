@@ -624,12 +624,12 @@ function drawScoreScale() {
     ctx.textAlign = "right";
     ctx.textBaseline = "middle";
 
-    const time = performance.now() / 1000; // زمان جاری برای انیمیشن
+    const time = performance.now() / 1000; // زمان برای انیمیشن
     for (let s = 1; s <= 100; s++) {
         let y = canvas.height - (s / 100) * canvas.height;
 
         if (s % 10 === 0) {
-            // خطوط اصلی: آبی و خط‌چین
+            // خطوط اصلی
             ctx.strokeStyle = 'rgba(121,234,195,0.6)';
             ctx.lineWidth = 2;
             ctx.setLineDash([10, 8]);
@@ -639,23 +639,14 @@ function drawScoreScale() {
             ctx.stroke();
             ctx.setLineDash([]);
 
-            // === ساخت افکت طلایی متحرک ===
-            const gradientWidth = 80; // پهنای خط نور
-            const offset = (time % 4) / 4 * (gradientWidth * 2); // حرکت نور هر 4 ثانیه
-            const grd = ctx.createLinearGradient(canvas.width - 60 - gradientWidth + offset, y, canvas.width - 60 + gradientWidth + offset, y);
-            grd.addColorStop(0, 'rgba(255,215,0,0)');      // شفاف
-            grd.addColorStop(0.3, 'rgba(255,223,0,1)');    // طلایی روشن
-            grd.addColorStop(0.5, 'rgba(255,255,255,1)');  // سفید درخشان
-            grd.addColorStop(0.7, 'rgba(255,223,0,1)');    // طلایی روشن
-            grd.addColorStop(1, 'rgba(255,215,0,0)');      // شفاف
-
-            ctx.fillStyle = grd;
-
-            // سایه نور اطراف عدد
-            ctx.shadowColor = 'gold';
-            ctx.shadowBlur = 15 + 5 * Math.sin(time * 2); // نوسان سایه
+            // عدد طلایی ثابت
+            ctx.fillStyle = 'gold';
             ctx.fillText(s, canvas.width - 60, y);
-            ctx.shadowBlur = 0;
+
+            // Glow متحرک اطراف عدد
+            ctx.shadowColor = 'rgba(255, 223, 0, 0.9)';
+            ctx.shadowBlur = 20 + 10 * Math.sin(time * 3 + s); // نوسان جذاب
+            ctx.fillText(s, canvas.width - 60, y);
 
         } else {
             // خطوط فرعی ساده
@@ -669,9 +660,6 @@ function drawScoreScale() {
     }
     ctx.restore();
 }
-
-
-
 
 
 
@@ -1376,6 +1364,7 @@ downloadBtn.addEventListener("click", async () => {
 </script>
 </body>
 </html>
+
 
 
 
