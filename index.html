@@ -530,7 +530,7 @@ canvas { display:block;}
    <div id="newsTicker" style="
     position: absolute;
     bottom: 15px; 
-    left: 100%; /* شروع از خارج صفحه */
+    left: -20%; /* شروع از خارج صفحه */
     white-space: nowrap;
     font-size: 11px; 
     color: yellow; 
@@ -896,38 +896,37 @@ setInterval(fetchNews, 10000);
     
     
 function showNewsTicker(text) {
-    // ایجاد عنصر ticker یا گرفتن المان موجود
     let ticker = document.getElementById('newsTicker');
     if(!ticker){
         ticker = document.createElement('div');
         ticker.id = 'newsTicker';
         ticker.style.position = 'absolute';
         ticker.style.bottom = '5px';
-        ticker.style.left = '100%'; // شروع از راست صفحه
         ticker.style.whiteSpace = 'nowrap';
         ticker.style.fontSize = '9px';
         ticker.style.color = 'red';
-        ticker.style.zIndex = 9999;
+        ticker.style.zIndex = 10001;
         document.body.appendChild(ticker);
     }
     ticker.innerText = text;
     
-    // انیمیشن عبور دو بار
+    // انیمیشن عبور از چپ به راست
     ticker.style.transition = 'none';
-    ticker.style.left = '100%';
+    ticker.style.left = '-' + ticker.offsetWidth + 'px';  // شروع از بیرون سمت چپ
     void ticker.offsetWidth; // force reflow
     ticker.style.transition = 'left 15s linear';
-    ticker.style.left = '-' + ticker.offsetWidth + 'px';
-    
-    // repeat دوبار
+    ticker.style.left = window.innerWidth + "px";  // حرکت تا بیرون سمت راست
+
+    // تکرار دوباره
     setTimeout(() => {
         ticker.style.transition = 'none';
-        ticker.style.left = '100%';
+        ticker.style.left = '-' + ticker.offsetWidth + 'px';  // دوباره بره چپ
         void ticker.offsetWidth;
         ticker.style.transition = 'left 15s linear';
-        ticker.style.left = '-' + ticker.offsetWidth + 'px';
-    }, 5000); 
+        ticker.style.left = window.innerWidth + "px";  // دوباره حرکت کنه به راست
+    }, 16000);  // زمان دقیق رو باید متناسب با سرعت (15s) تنظیم کنی
 }
+
 
 
 
@@ -1347,6 +1346,7 @@ downloadBtn.addEventListener("click", async () => {
 </script>
 </body>
 </html>
+
 
 
 
