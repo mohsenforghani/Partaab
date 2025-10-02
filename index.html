@@ -602,7 +602,7 @@ function resizeCanvas(){
     canvas.height = window.innerHeight;
     document.body.style.height = window.innerHeight + "px";  // همون کاری که setFullHeight می‌کرد
     ball.x = canvas.width/2;
-    ball.y = canvas.height * 0.9;
+    ball.y = canvas.height * 0.93;
 }
 
 resizeCanvas();
@@ -881,7 +881,7 @@ spawnFloat(displayText, fx, fy);
 
 function resetBall(){
     ball.x = canvas.width/2;
-    ball.y = canvas.height * 0.9;
+    ball.y = canvas.height * 0.93;
     ball.vx = 0;
     ball.vy = 0;
     ball.color = 'white';
@@ -1361,6 +1361,7 @@ downloadBtn.addEventListener("click", async () => {
 </script>
 </body>
 </html>
+
 
 
 
