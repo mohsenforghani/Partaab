@@ -185,8 +185,8 @@ z-index:9998;   /* بالاتر از همه */
 }
 canvas {
     display: block;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;   /* عرض نمایش داده شود ولی اندازه واقعی canvas بدون تغییر */
+    height: 100%;  /* ارتفاع نمایش داده شود */
 }
 
 </style>
@@ -638,7 +638,7 @@ function drawScoreScale(){
             ctx.stroke();
             ctx.setLineDash([]); 
 
-            // نوشتن عدد قرمز
+            // نوشتن عدد زرد
             ctx.fillStyle = 'yellow';
             ctx.fillText(s, canvas.width - 60, y);
 
@@ -1361,6 +1361,7 @@ downloadBtn.addEventListener("click", async () => {
 </script>
 </body>
 </html>
+
 
 
 
