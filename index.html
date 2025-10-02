@@ -643,8 +643,8 @@ function drawScoreScale(){
             // === خط‌چین قرمز برای 100 ===
             if(s === 100){
                 ctx.strokeStyle = 'red';
-                ctx.lineWidth = 2;
-                ctx.setLineDash([5, 5]); // الگوی خط‌چین
+                ctx.lineWidth = 4;
+                ctx.setLineDash([10, 8]); // الگوی خط‌چین
                 ctx.beginPath();
                 ctx.moveTo(0, y);
                 ctx.lineTo(canvas.width, y);
@@ -1369,6 +1369,7 @@ downloadBtn.addEventListener("click", async () => {
 </script>
 </body>
 </html>
+
 
 
 
