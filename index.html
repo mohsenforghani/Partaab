@@ -167,11 +167,7 @@ text-align: right; /* پیام‌ها به سمت راست تراز می‌شو�
 }
 
 
-
-
-
-
-
+    
 #resetBtn {
     position: absolute;
     bottom: 0;
@@ -187,7 +183,12 @@ text-align: right; /* پیام‌ها به سمت راست تراز می‌شو�
 z-index:9998;   /* بالاتر از همه */
     border: none;
 }
-canvas { display:block;}
+canvas {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+}
+
 </style>
 </head>
 <body>
@@ -1348,6 +1349,7 @@ downloadBtn.addEventListener("click", async () => {
 </script>
 </body>
 </html>
+
 
 
 
