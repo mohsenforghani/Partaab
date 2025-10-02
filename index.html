@@ -900,12 +900,6 @@ function showNewsTicker(text) {
     if(!ticker){
         ticker = document.createElement('div');
         ticker.id = 'newsTicker';
-        ticker.style.position = 'absolute';
-        ticker.style.bottom = '5px';
-        ticker.style.whiteSpace = 'nowrap';
-        ticker.style.fontSize = '9px';
-        ticker.style.color = 'red';
-        ticker.style.zIndex = 10001;
         document.body.appendChild(ticker);
     }
     ticker.innerText = text;
@@ -1346,6 +1340,7 @@ downloadBtn.addEventListener("click", async () => {
 </script>
 </body>
 </html>
+
 
 
 
