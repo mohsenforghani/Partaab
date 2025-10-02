@@ -900,9 +900,15 @@ function showNewsTicker(text) {
     if(!ticker){
         ticker = document.createElement('div');
         ticker.id = 'newsTicker';
+        ticker.style.position = 'absolute';
+        ticker.style.bottom = '5px';
+        ticker.style.whiteSpace = 'nowrap';
+        ticker.style.fontSize = '9px';
+        ticker.style.color = 'red';
+        ticker.style.zIndex = 9999;
         document.body.appendChild(ticker);
     }
-
+    ticker.innerText = text;
     
     // انیمیشن عبور از چپ به راست
     ticker.style.transition = 'none';
@@ -920,6 +926,7 @@ function showNewsTicker(text) {
         ticker.style.left = window.innerWidth + "px";  // دوباره حرکت کنه به راست
     }, 16000);  // زمان دقیق رو باید متناسب با سرعت (15s) تنظیم کنی
 }
+
 
 
 
@@ -1340,6 +1347,7 @@ downloadBtn.addEventListener("click", async () => {
 </script>
 </body>
 </html>
+
 
 
 
