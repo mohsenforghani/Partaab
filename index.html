@@ -158,12 +158,12 @@ text-align: right; /* پیام‌ها به سمت راست تراز می‌شو�
     right: 0;
     top: 50%;
     transform: translateY(-50%);
-    width: 10px;          /* عرض کوچک */
-    height: 120px;
+    width: 3%;          /* عرض کوچک */
+    height: 10%;
     background-color: #ff4500;
     color: white;
     font-weight: bold;
-    font-size: 12px;
+    font-size: 10px;
     text-align: center;
     line-height: 14px;
     border-radius: 5px 0 0 5px;
@@ -433,7 +433,7 @@ canvas {
 
 
 <!-- دکمه برای نمایش/مخفی کردن صفحه چت -->
-<button id="toggleChatBtn">Chat</button>
+<button id="toggleChatBtn">Show ChatRoom</button>
 
 <!-- صفحه چت -->
 <div id="chatBox" style="display: none;">
@@ -734,11 +734,11 @@ document.getElementById('toggleChatBtn').addEventListener('click', () => {
     if (chatBox.style.display === 'none') {
         // نمایش چت
         chatBox.style.display = 'block';
-        chatBtn.innerText = 'مخفی کردن چت'; // تغییر متن دکمه
+        chatBtn.innerText = 'Hide ChatRoom';
     } else {
         // مخفی کردن چت
         chatBox.style.display = 'none';
-        chatBtn.innerText = 'نمایش چت'; // تغییر متن دکمه
+        chatBtn.innerText = 'Show ChatRoom'; // تغییر متن دکمه
     }
 });
 
@@ -1378,6 +1378,7 @@ downloadBtn.addEventListener("click", async () => {
 </script>
 </body>
 </html>
+
 
 
 
