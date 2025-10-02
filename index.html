@@ -620,7 +620,7 @@ function drawScoreScale(){
    ctx.save();
     ctx.font = "bold 20px 'Times New Roman'";
     ctx.textAlign = "left";
-    ctx.textBaseline = "middle";
+    ctx.textBaseline = "top";
 
     for(let s=1; s<=100; s++){
         let y = canvas.height - (s/100)*canvas.height;
@@ -1357,6 +1357,7 @@ downloadBtn.addEventListener("click", async () => {
 </script>
 </body>
 </html>
+
 
 
 
