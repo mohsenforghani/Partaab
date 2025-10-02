@@ -891,7 +891,7 @@ async function fetchNews() {
 
 // فراخوانی اولیه و سپس هر 30 ثانیه
 fetchNews();
-setInterval(fetchNews, 30000);
+setInterval(fetchNews, 10000);
 
     
     
@@ -926,7 +926,7 @@ function showNewsTicker(text) {
         void ticker.offsetWidth;
         ticker.style.transition = 'left 15s linear';
         ticker.style.left = '-' + ticker.offsetWidth + 'px';
-    }, 15000); 
+    }, 5000); 
 }
 
 
@@ -945,7 +945,7 @@ setInterval(async () => {
     }
 }, 5000); // هر 5 ثانیه چک شود
 
-setInterval(fetchNews, 5000);
+//setInterval(fetchNews, 5000);
 
 
 function draw(){
@@ -1347,6 +1347,7 @@ downloadBtn.addEventListener("click", async () => {
 </script>
 </body>
 </html>
+
 
 
 
