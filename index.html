@@ -618,33 +618,48 @@ window.addEventListener('resize', resizeCanvas);
 
 
 // Scale
-function drawScoreScale(){
-   ctx.save();
+function drawScoreScale() {
+    ctx.save();
     ctx.font = "bold 20px 'Times New Roman'";
-    ctx.textAlign = "left";
+    ctx.textAlign = "right";
     ctx.textBaseline = "middle";
 
-    for(let s=1; s<=100; s++){
-        let y = canvas.height - (s/100)*canvas.height;
+    const time = performance.now() / 1000; // زمان جاری برای انیمیشن
+    for (let s = 1; s <= 100; s++) {
+        let y = canvas.height - (s / 100) * canvas.height;
 
-        if(s % 10 === 0){  
+        if (s % 10 === 0) {
             // خطوط اصلی: آبی و خط‌چین
-            ctx.strokeStyle = 'rgba(121,234,195,0.6)'; // آبی نیمه‌شفاف
+            ctx.strokeStyle = 'rgba(121,234,195,0.6)';
             ctx.lineWidth = 2;
-            ctx.setLineDash([10, 8]); 
+            ctx.setLineDash([10, 8]);
             ctx.beginPath();
             ctx.moveTo(0, y);
             ctx.lineTo(canvas.width, y);
             ctx.stroke();
-            ctx.setLineDash([]); 
+            ctx.setLineDash([]);
 
-            // نوشتن عدد زرد
-            ctx.fillStyle = 'yellow';
+            // === ساخت افکت طلایی متحرک ===
+            const gradientWidth = 80; // پهنای خط نور
+            const offset = (time % 4) / 4 * (gradientWidth * 2); // حرکت نور هر 4 ثانیه
+            const grd = ctx.createLinearGradient(canvas.width - 60 - gradientWidth + offset, y, canvas.width - 60 + gradientWidth + offset, y);
+            grd.addColorStop(0, 'rgba(255,215,0,0)');      // شفاف
+            grd.addColorStop(0.3, 'rgba(255,223,0,1)');    // طلایی روشن
+            grd.addColorStop(0.5, 'rgba(255,255,255,1)');  // سفید درخشان
+            grd.addColorStop(0.7, 'rgba(255,223,0,1)');    // طلایی روشن
+            grd.addColorStop(1, 'rgba(255,215,0,0)');      // شفاف
+
+            ctx.fillStyle = grd;
+
+            // سایه نور اطراف عدد
+            ctx.shadowColor = 'gold';
+            ctx.shadowBlur = 15 + 5 * Math.sin(time * 2); // نوسان سایه
             ctx.fillText(s, canvas.width - 60, y);
+            ctx.shadowBlur = 0;
 
         } else {
-            // خطوط فرعی: بنفش ساده
-            ctx.strokeStyle = 'rgba(255,255,255,0.2)'; // سفید
+            // خطوط فرعی ساده
+            ctx.strokeStyle = 'rgba(255,255,255,0.2)';
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(0, y);
@@ -1361,6 +1376,7 @@ downloadBtn.addEventListener("click", async () => {
 </script>
 </body>
 </html>
+
 
 
 
