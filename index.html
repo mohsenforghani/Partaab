@@ -625,6 +625,7 @@ function drawScoreScale() {
     ctx.textBaseline = "middle";
 
     const time = performance.now() / 1000; // زمان برای انیمیشن
+
     for (let s = 1; s <= 100; s++) {
         let y = canvas.height - (s / 100) * canvas.height;
 
@@ -639,15 +640,16 @@ function drawScoreScale() {
             ctx.stroke();
             ctx.setLineDash([]);
 
-            // عدد طلایی ثابت
+            // Glow طلایی
+            ctx.shadowColor = 'rgba(255, 223, 0, 0.9)';
+            ctx.shadowBlur = 20 + 10 * Math.sin(time * 3 + s);
+
+            // متن ثابت
             ctx.fillStyle = 'gold';
             ctx.fillText(s, canvas.width - 60, y);
 
-            // Glow متحرک اطراف عدد
-            ctx.shadowColor = 'rgba(255, 223, 0, 0.9)';
-            ctx.shadowBlur = 20 + 10 * Math.sin(time * 3 + s); // نوسان جذاب
-            ctx.fillText(s, canvas.width - 60, y);
-
+            // پاکسازی Glow برای خطوط بعدی
+            ctx.shadowBlur = 0;
         } else {
             // خطوط فرعی ساده
             ctx.strokeStyle = 'rgba(255,255,255,0.2)';
@@ -660,6 +662,7 @@ function drawScoreScale() {
     }
     ctx.restore();
 }
+
 
 
 
@@ -1364,6 +1367,7 @@ downloadBtn.addEventListener("click", async () => {
 </script>
 </body>
 </html>
+
 
 
 
