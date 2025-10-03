@@ -15,6 +15,7 @@ body { margin:0; overflow:hidden; background:#222; touch-action:none; font-famil
 #turns {left:10px; top:2%; color: #00FF00 ; text-shadow:0 1px 2px black;}
 #nameDisplay {top:4%; left:10px; color: #00FF00; text-shadow:0 1px 2px black;}
 #finalScore {
+  
     position: absolute;
     top: 30%;
     left: 50%;
@@ -576,7 +577,7 @@ canvas {
 <button id="resetBtn">شروع مجدد</button>
 <button id="showScoresBtn">نمایش امتیازات</button>
 <canvas id="gameCanvas"></canvas>
-
+<button id="resizeCanvasBtn" style="position:absolute; bottom:40px; left:10px; z-index:21000;">R</button>
     
    <div id="newsTicker" style="
     position: absolute;
@@ -1261,7 +1262,9 @@ document.getElementById('totalScoreDisplay').innerText = 'Total Score : 0';
 });
 
 
-
+document.getElementById('resizeCanvasBtn').addEventListener('click', () => {
+    resizeCanvas();  // دکمه ریسیت کردن canvas
+});
 
 
 
@@ -1408,10 +1411,6 @@ downloadBtn.addEventListener("click", async () => {
     downloadBtn.style.display = "none";
 });
 
-
-
-
-
     gameLoop(); // ادامه بازی
 } else {
     gameLoop(); // ادامه بازی
@@ -1423,74 +1422,3 @@ downloadBtn.addEventListener("click", async () => {
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
