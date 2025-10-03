@@ -917,7 +917,7 @@ function calculateScore(){
     turnScores.push(score);
     totalScore += score;
 
-
+document.getElementById('totalScoreDisplay').style.display = 'block';
 // نمایش جمع امتیاز
 document.getElementById('totalScoreDisplay').innerText = 'Total Score : ' + totalScore.toFixed(2);
 
@@ -1242,7 +1242,7 @@ document.getElementById('resetBtn').addEventListener('click', ()=>{
     document.getElementById('finalScore').style.display = 'none';
     document.getElementById('resetBtn').style.display = 'none';
 document.getElementById('totalScoreDisplay').innerText = 'Total Score : 0';
-     totalScoreDisplay.style.display = "none";
+    document.getElementById('totalScoreDisplay').style.display = 'none';
 });
 
 
@@ -1262,7 +1262,7 @@ document.getElementById('resetBtnSmall').addEventListener('click', ()=> {
     document.getElementById('finalScore').style.display = 'none';
     document.getElementById('resetBtn').style.display = 'none';
 document.getElementById('totalScoreDisplay').innerText = 'Total Score : 0';
-    totalScoreDisplay.style.display = "none";
+   document.getElementById('totalScoreDisplay').style.display = 'none';
 });
 
 
@@ -1428,6 +1428,7 @@ downloadBtn.addEventListener("click", async () => {
 </script>
 </body>
 </html>
+
 
 
 
