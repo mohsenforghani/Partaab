@@ -577,7 +577,7 @@ canvas {
 <button id="resetBtn">شروع مجدد</button>
 <button id="showScoresBtn">نمایش امتیازات</button>
 <canvas id="gameCanvas"></canvas>
-<button id="resizeCanvasBtn" style="position:absolute; bottom:40px; left:10px; z-index:21000;">R</button>
+
     
    <div id="newsTicker" style="
     position: absolute;
@@ -643,6 +643,9 @@ let turn = 0;
 const maxTurns = 5;
 let turnScores = [];
 
+let resizeTapCount = 0;  // شمارنده ضربه برای ریسایز
+const tapsNeeded = 8;    // تعداد ضربه لازم برای ریسایز
+  
 let ball = {x:0, y:0, r:20, vx:0, vy:0, color:'white', scored:false};
 let hasThrown = false;
 let isMoving = false;
@@ -693,7 +696,7 @@ function drawScoreScale(){
             // === خط‌چین قرمز برای 100 ===
             if(s === 100){
                 ctx.strokeStyle = 'red';
-                ctx.lineWidth = 7;
+                ctx.lineWidth = 4;
                 ctx.setLineDash([10, 8]); // الگوی خط‌چین
                 ctx.beginPath();
                 ctx.moveTo(0, y);
@@ -741,6 +744,13 @@ canvas.addEventListener('pointerdown', e=>{
     e.preventDefault();
 if (e.pointerType !== 'touch' ) return;
 
+  // ===== بخش جدید: شمارنده ضربه برای ریسایز =====
+    resizeTapCount++;
+    if(resizeTapCount >= tapsNeeded){
+        resizeCanvas();       // فقط ریسایز کانواس
+        resizeTapCount = 0;   // ریست شمارنده
+    }
+  
     if(hasThrown || isMoving || turn >= maxTurns) return;
     const pos = getTouchPos(e);
     const dx = pos.x - ball.x;
@@ -1063,12 +1073,6 @@ function draw(){
 
 
 
-
-
-
-
-
-
 function showFinalScore(){
     document.getElementById('finalScore').innerHTML =
         'امتیاز نهایی<br>' + totalScore.toFixed(2);
@@ -1262,9 +1266,7 @@ document.getElementById('totalScoreDisplay').innerText = 'Total Score : 0';
 });
 
 
-document.getElementById('resizeCanvasBtn').addEventListener('click', () => {
-    resizeCanvas();  // دکمه ریسیت کردن canvas
-});
+
 
 
 
@@ -1411,6 +1413,10 @@ downloadBtn.addEventListener("click", async () => {
     downloadBtn.style.display = "none";
 });
 
+
+
+
+
     gameLoop(); // ادامه بازی
 } else {
     gameLoop(); // ادامه بازی
@@ -1422,4 +1428,5 @@ downloadBtn.addEventListener("click", async () => {
 </script>
 </body>
 </html>
+
 
