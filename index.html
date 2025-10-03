@@ -499,7 +499,7 @@ canvas {
     text-align: center;
     line-height: 1.4;
     z-index: 0;       /* پشت canvas */
-    opacity: 0.6;     /* اضافه شد */
+    opacity: 0.6;     /* شفافیت ثابت */
 ">
     <div id="topPlayerLabel" class="glowText">بهترین بازیکن بازی</div>
     <div id="topPlayerNameValue" class="glowText">🏆 ... 🏆</div>
@@ -515,13 +515,7 @@ canvas {
         0 0 10px rgba(255,215,0,0.6),
         0 0 15px rgba(255,165,0,0.6),
         0 0 20px rgba(255,140,0,0.6);
-    animation: glowPulse 1.5s infinite alternate;
-}
-
-@keyframes glowPulse {
-    0% { text-shadow: 0 0 5px rgba(255,255,255,0.6), 0 0 10px rgba(255,215,0,0.6), 0 0 15px rgba(255,165,0,0.6), 0 0 20px rgba(255,140,0,0.6); }
-    50% { text-shadow: 0 0 10px rgba(255,255,255,0.6), 0 0 20px rgba(255,215,0,0.6), 0 0 30px rgba(255,165,0,0.6), 0 0 40px rgba(255,140,0,0.6); }
-    100% { text-shadow: 0 0 5px rgba(255,255,255,0.6), 0 0 10px rgba(255,215,0,0.6), 0 0 15px rgba(255,165,0,0.6), 0 0 20px rgba(255,140,0,0.6); }
+  
 }
 </style>
 
