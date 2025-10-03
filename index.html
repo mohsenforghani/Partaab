@@ -806,22 +806,36 @@ document.getElementById("showScoresBtn").addEventListener("click", ()=>{
     let win = window.open("", "_blank", "width=600,height=800");
 
     // نمایش پیام loading اولیه
-    win.document.write("<h2 style='text-align:center;'>در حال بارگذاری امتیازات...</h2>");
+    win.document.write(`
+<div style="
+    width: 100vw; 
+    height: 100vh; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    font-size: 32px; 
+    font-weight: normal;
+    text-align: center;
+">
+در حال بارگذاری امتیازات نفرات اول تا 250...
+</div>
+`);
+  
 
     fetch("https://script.google.com/macros/s/AKfycbw3ij6MXvWgSHnUlDxAhlT150K6GgOX4hyU63VHRJ1_M_QXvI0_-5PbCbh4qrSKrAI/exec")
     .then(res=>res.json())
     .then(data=>{
         data.sort((a,b)=> b.score - a.score);
 
-        // فقط 400 نفر اول
-        data = data.slice(0, 400);
+        // رتبه 1 تا 250
+        data = data.slice(0, 250);
 
         let html = `
         <html lang="fa">
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-            <title>لیست امتیازات</title>
+            <title> لیست امتیازات </title>
             <style>
                 body { font-family: Arial, sans-serif; margin: 10px; }
                 table { border-collapse: collapse; width: 100%; }
@@ -1428,6 +1442,7 @@ downloadBtn.addEventListener("click", async () => {
 </script>
 </body>
 </html>
+
 
 
 
