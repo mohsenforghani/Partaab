@@ -71,8 +71,7 @@ body { margin:0; overflow:hidden; background:#222; touch-action:none; font-famil
 
     transition: all 0.3s ease;
 
-    /* درخشش متحرک */
-    animation: glowSun 2s infinite alternate;
+   
 
     /* ایجاد زمینه برای انعکاس */
     overflow: visible;
@@ -108,7 +107,6 @@ body { margin:0; overflow:hidden; background:#222; touch-action:none; font-famil
 
 /* افکت هاور با لرزش و درخشش */
 #showScoresBtn:hover {
-    animation: glowSun 1s infinite alternate, shake 0.5s ease-in-out;
     background-color: #FFC700;  /* طلایی روشن‌تر */
     color: black;
 }
@@ -840,9 +838,9 @@ document.getElementById('toggleChatBtn').addEventListener('click', () => {
 
 document.getElementById("showScoresBtn").addEventListener("click", ()=>{
     const btn = document.getElementById("showScoresBtn");
-    btn.style.animation = 'none';
+  
     void btn.offsetWidth; // force reflow
-    btn.style.animation = 'shake 0.5s ease-in-out';
+    
 
     // ==== باز کردن پنجره بلافاصله برای جلوگیری از بلاک شدن popup ====
     let win = window.open("", "_blank", "width=600,height=800");
@@ -1508,3 +1506,4 @@ showTopPlayerName(); // قبل از gameLoop()
 </script>
 </body>
 </html>
+
