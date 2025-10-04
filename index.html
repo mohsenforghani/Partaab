@@ -10,7 +10,7 @@
 <title>بازی پرتاب آتشین </title>
 <style>
 body { margin:0; overflow:hidden; background:#222; touch-action:none; font-family:Arial,sans-serif; color:white;}
-#score,#turns,#nameDisplay {position:absolute; font-size:12px; z-index:10;}
+#score,#turns,#nameDisplay {position:absolute; font-size:12px; z-index:10;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;pointer-events: none;}
 #score {left:50%; bottom:200px; transform:translateX(-50%); text-align:center;}
 #turns {left:10px; top:2%; color: #00FF00 ; text-shadow:0 1px 2px black;}
 #nameDisplay {top:4%; left:10px; color: #00FF00; text-shadow:0 1px 2px black;}
@@ -1505,5 +1505,6 @@ showTopPlayerName(); // قبل از gameLoop()
 </script>
 </body>
 </html>
+
 
 
