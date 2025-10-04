@@ -37,23 +37,6 @@ body { margin:0; overflow:hidden; background:#222; touch-action:none; font-famil
   display: none; /* پنهان در ابتدا */
 }
 
-  <button id="loadStage2Btn" style="
-    position: fixed;
-    bottom: 10px;
-    left: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    background-color: #FF5733;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    z-index: 10000;
-">مرحله دوم</button>
-
-
-  
 #gameCanvas {
     display: block;
     margin: 0 auto;
@@ -1361,15 +1344,7 @@ document.getElementById('totalScoreDisplay').innerText = 'Total Score : 0';
 });
 
 
-document.getElementById('loadStage2Btn').addEventListener('click', ()=>{
-    const rawUrl = "https://raw.githubusercontent.com/mohsenforghani/partaab2/refs/heads/main/index.html"; 
-    // مسیر واقعی فایل HTML را جایگزین کن
 
-    // باز کردن فایل در تب جدید
-    window.open(rawUrl, "_blank");
-});
-
-  
 
 
 
@@ -1530,7 +1505,5 @@ showTopPlayerName(); // قبل از gameLoop()
 </script>
 </body>
 </html>
-
-
 
 
