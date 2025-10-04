@@ -792,7 +792,7 @@ function checkStage2Access() {
     // گرفتن امتیاز مرحله اول از LocalStorage (یا میتونی از سرور بگیری)
     let stage1Score = parseInt(localStorage.getItem('totalscore')) || 0;
 
-    if (stage1Score >= 480) {
+    if (stage1Score >= 200) {
         document.getElementById('stage2Btn').disabled = false;
         localStorage.setItem('stage2Unlocked', 'true'); // ذخیره وضعیت فعال بودن دکمه
     }
@@ -1549,5 +1549,6 @@ showTopPlayerName(); // قبل از gameLoop()
 </script>
 </body>
 </html>
+
 
 
