@@ -614,7 +614,7 @@ canvas {
 
 
 <!-- دکمه مرحله دوم -->
-<button id="stage2Btn" style="position: fixed; bottom: 10px; left: 10px;" disabled>
+<button id="stage2Btn" style="position: fixed; bottom: 30px; left: 10px;" disabled>
   مرحله دوم
 </button>
     
@@ -787,16 +787,7 @@ function getTouchPos(e) {
 
 
 
-// تابعی برای چک کردن امتیاز و فعال کردن دکمه
-function checkStage2Access() {
-    // گرفتن امتیاز مرحله اول از LocalStorage (یا میتونی از سرور بگیری)
-    let stage1Score = parseInt(localStorage.getItem('totalscore')) || 0;
 
-    if (stage1Score >= 200) {
-        document.getElementById('stage2Btn').disabled = false;
-        localStorage.setItem('stage2Unlocked', 'true'); // ذخیره وضعیت فعال بودن دکمه
-    }
-}
 
 
 
@@ -1272,25 +1263,7 @@ function sendScore() {
 
 
 
-// بررسی وضعیت قبلی هنگام ورود به بازی
-if (localStorage.getItem('stage2Unlocked') === 'true') {
-    document.getElementById('stage2Btn').disabled = false;
-}
 
-// فعال کردن دکمه با توجه به امتیاز فعلی
-checkStage2Access();
-
-// اضافه کردن عملکرد کلیک دکمه
-document.getElementById('stage2Btn').addEventListener('click', function() {
-    // لینک HTML در گیت‌هاب
-    window.open('https://raw.githubusercontent.com/mohsenforghani/partaab2/refs/heads/main/index.html', '_blank');
-});
-
-// وقتی بازیکن مرحله اول را بازی کرد و امتیازش مشخص شد
-function updateStage1Score(score) {
-    localStorage.setItem('stage1Score', score);
-    checkStage2Access();
-}
 
 
 
@@ -1549,6 +1522,7 @@ showTopPlayerName(); // قبل از gameLoop()
 </script>
 </body>
 </html>
+
 
 
 
