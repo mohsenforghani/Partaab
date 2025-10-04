@@ -621,6 +621,11 @@ canvas {
     font-size: 12px; 
     color: yellow; 
     font-family: Arial, sans-serif;
+ -webkit-user-select: none; /* برای Safari و iOS */
+  -moz-user-select: none;    /* برای Firefox */
+  -ms-user-select: none;     /* برای IE */
+  user-select: none;         /* برای مرورگرهای جدید */
+  pointer-events: none;      /* جلوگیری از تأثیر کلیک یا درگ روی سایر دکمه‌ها */
     z-index: 1000;
 "></div>
 
@@ -1500,4 +1505,5 @@ showTopPlayerName(); // قبل از gameLoop()
 </script>
 </body>
 </html>
+
 
