@@ -616,7 +616,7 @@ canvas {
 <!-- دکمه مرحله دوم -->
 <button id="loadStage2Btn" style="
     position: fixed;
-    bottom: 40px;
+    bottom: 70px;
     left: 10px;
     padding: 10px 20px;
     font-size: 16px;
@@ -1027,7 +1027,7 @@ spawnFloat(displayText, fx, fy);
         if(turn >= maxTurns){
             showFinalScore();
             sendScore();
-          checkStage2Availability();
+          
         }
     }, 500);
 }
@@ -1247,14 +1247,14 @@ checkInternetAtStart();
 
 // تابع چک کردن و فعال کردن دکمه
 function checkStage2Availability() {
-    if(totalScore >= 470 || localStorage.getItem("stage2Unlocked") === "true") {
-        stage2Btn.disabled = false;
+    if(totalScore >= 400 || localStorage.getItem("stage2Unlocked") === "true") {
         stage2Btn.style.opacity = 1;
         stage2Btn.style.cursor = "pointer";
 
         // ذخیره وضعیت برای مراجعات بعدی
         localStorage.setItem("stage2Unlocked", "true");
     } else {
+      alert("حداقل امتیاز جهت فعال‌سازی مرحله دوم 400 می‌باشد 🎯");
         stage2Btn.disabled = true;
         stage2Btn.style.opacity = 0.5;
         stage2Btn.style.cursor = "not-allowed";
@@ -1556,6 +1556,7 @@ showTopPlayerName(); // قبل از gameLoop()
 </script>
 </body>
 </html>
+
 
 
 
