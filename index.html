@@ -840,9 +840,12 @@ canvas.addEventListener('pointerup', e=>{
 
 const stage2Btn = document.getElementById('loadStage2Btn');
 
-stage2Btn.addEventListener('click', ()=>{
-    const rawUrl = "https://raw.githubusercontent.com/mohsenforghani/partaab2/refs/heads/main/index.html";
-    window.open(rawUrl, "_blank");
+stage2Btn.addEventListener('click', () => {
+    if (!stage2Btn.disabled) {
+        window.open('https://github.com/mohsenforghani/partaab-stage2/raw/main/index.html', '_blank');
+    } else {
+        alert("برای دسترسی به مرحله دوم، باید حداقل امتیاز 470 را بدست بیاورید.");
+    }
 });
 
 
