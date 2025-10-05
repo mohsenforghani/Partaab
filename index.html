@@ -71,8 +71,7 @@ body { margin:0; overflow:hidden; background:#222; touch-action:none; font-famil
 
     transition: all 0.3s ease;
 
-   
-
+  
     /* ایجاد زمینه برای انعکاس */
     overflow: visible;
 }
@@ -240,9 +239,6 @@ canvas {
 </style>
 </head>
 <body>
-
-
-
 
 
 
@@ -459,11 +455,6 @@ canvas {
 })();
 </script>
 <!-- ===== tutorial modal end ===== -->
-
-
-
-
-
 
 
 
@@ -993,16 +984,6 @@ document.getElementById("showScoresBtn").addEventListener("click", ()=>{
 });
 
 
-
-
-
-
-
-
-
-
-
-
 // Update
 function update(){
     if(isMoving){
@@ -1034,7 +1015,7 @@ function calculateScore(){
 
     let score;
     if(ball.y < 0){ 
-      soundradshodan100();
+      
       score = 0;
     } else {
         score = (canvas.height - ball.y) / canvas.height * 100; 
@@ -1242,6 +1223,9 @@ function updateBallLabel(ball) {
     
     // نمایش فقط وقتی توپ در حال حرکت است
     ballLabel.style.display = (isMoving || hasThrown) ? 'block' : 'none';
+  if (ball.y===0) {
+    soundradshodan100();
+  }
 }
 
 
@@ -1574,6 +1558,7 @@ showTopPlayerName(); // قبل از gameLoop()
 </script>
 </body>
 </html>
+
 
 
 
