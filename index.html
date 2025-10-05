@@ -1246,7 +1246,7 @@ function updateBallLabel(ball) {
 
     // متن عدد کنار توپ: فقط عدد صحیح (رقم اعشار نداشته باشد)
     ballLabel.innerText = Math.floor((canvas.height - ball.y)/canvas.height*100);
-    if(ball.y < 0){ 
+    if(ball.y = 0){ 
       soundradshodan100();
     }
     // نمایش فقط وقتی توپ در حال حرکت است
@@ -1320,16 +1320,6 @@ function sendScore() {
         }
     });
 }
-
-
-
-
-
-
-
-
-
-
 
 // === جایگزین با تنظیمات پروژه خودت ===
 const firebaseConfig = {
@@ -1583,5 +1573,6 @@ showTopPlayerName(); // قبل از gameLoop()
 </script>
 </body>
 </html>
+
 
 
