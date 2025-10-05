@@ -616,7 +616,7 @@ canvas {
 <!-- دکمه مرحله دوم -->
 <button id="loadStage2Btn" style="
     position: fixed;
-    bottom: 70px;
+    bottom: 40px;
     left: 10px;
     padding: 10px 20px;
     font-size: 16px;
@@ -625,7 +625,8 @@ canvas {
     color: white;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
+    cursor: not-allowed; /* هنگام غیر فعال بودن */
+    opacity: 0.5;  /* هنگام غیر فعال بودن */
     z-index: 10000;
 " disabled>مرحله دوم</button>
     
@@ -960,7 +961,7 @@ document.getElementById("showScoresBtn").addEventListener("click", ()=>{
 function checkStage2Availability() {
     const stage2Btn = document.getElementById('loadStage2Btn');
 
-    if(totalScore >= 470){
+    if(totalScore >= 300){
         stage2Btn.disabled = false;
         stage2Btn.style.opacity = 1;  // تغییر ظاهر وقتی فعال شد
         stage2Btn.style.cursor = "pointer";
@@ -1556,6 +1557,7 @@ showTopPlayerName(); // قبل از gameLoop()
 </script>
 </body>
 </html>
+
 
 
 
