@@ -493,6 +493,10 @@ canvas {
     <source src="https://raw.githubusercontent.com/mohsenforghani/gamesound/refs/heads/main/over100.mp3" type="audio/mp3">
     Your browser does not support the audio element.
 </audio>
+  <audio id="soundScore" preload="auto">
+    <source src="https://raw.githubusercontent.com/mohsenforghani/gamesound/refs/heads/main/jiring.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+</audio>
 
 <div id="topPlayerName" style="
     position: absolute;
@@ -710,6 +714,7 @@ let turnScores = [];
   
   let gameSound = document.getElementById('gameSound');
 let soundOver100 = document.getElementById('over100');
+  let soundScoreInGame = document.getElementById('soundScore');
 // وقتی بازی شروع می‌شود، صدا را پخش کن
 function startGame() {
     gameSound.loop = true;  // برای تکرار صدا
@@ -718,9 +723,13 @@ function startGame() {
 
 function soundradshodan100() {
     soundOver100.play();       // پخش صدا
-  soundOver100.loop = false;  // برای تکرار صدا
-    
+  soundOver100.loop = false; 
 }
+  function soundScoreInGame() {
+    soundScore.play();       // پخش صدا
+  soundScore.loop = false;   
+}
+
   
 let resizeTapCount = 0;  // شمارنده ضربه برای ریسایز
 const tapsNeeded = 20;    // تعداد ضربه لازم برای ریسایز
@@ -1035,6 +1044,7 @@ function calculateScore(){
       soundradshodan100();
       score = 0;
     } else {
+        soundScoreInGame();
         score = (canvas.height - ball.y) / canvas.height * 100; 
         score = parseFloat(score.toFixed(2));
     }
@@ -1572,6 +1582,7 @@ showTopPlayerName(); // قبل از gameLoop()
 </script>
 </body>
 </html>
+
 
 
 
