@@ -614,9 +614,20 @@ canvas {
 
 
 <!-- دکمه مرحله دوم -->
-<button id="stage2Btn" style="position: fixed; bottom: 30px; left: 10px;" disabled>
-  مرحله دوم
-</button>
+<button id="loadStage2Btn" style="
+    position: fixed;
+    bottom: 40px;
+    left: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #FF5733;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 10000;
+" disabled>مرحله دوم</button>
     
 
 
@@ -826,7 +837,15 @@ canvas.addEventListener('pointerup', e=>{
 });
 
 
+const stage2Btn = document.getElementById('loadStage2Btn');
 
+stage2Btn.addEventListener('click', ()=>{
+    const rawUrl = "https://raw.githubusercontent.com/mohsenforghani/partaab2/refs/heads/main/index.html";
+    window.open(rawUrl, "_blank");
+});
+
+
+  
 
 
 // دکمه نمایش/مخفی کردن چت
@@ -986,6 +1005,7 @@ function calculateScore(){
 document.getElementById('totalScoreDisplay').style.display = 'block';
 // نمایش جمع امتیاز
 document.getElementById('totalScoreDisplay').innerText = 'Total Score : ' + totalScore.toFixed(2);
+  
 
 // === نمایش امتیاز شناور در موقعیت توقف توپ ===
   // جدید — نمایش با دو رقم اعشار
@@ -1007,6 +1027,7 @@ spawnFloat(displayText, fx, fy);
         if(turn >= maxTurns){
             showFinalScore();
             sendScore();
+          checkStage2Availability();
         }
     }, 500);
 }
@@ -1224,10 +1245,23 @@ checkInternetAtStart();
 
 
 
+// تابع چک کردن و فعال کردن دکمه
+function checkStage2Availability() {
+    if(totalScore >= 470 || localStorage.getItem("stage2Unlocked") === "true") {
+        stage2Btn.disabled = false;
+        stage2Btn.style.opacity = 1;
+        stage2Btn.style.cursor = "pointer";
 
+        // ذخیره وضعیت برای مراجعات بعدی
+        localStorage.setItem("stage2Unlocked", "true");
+    } else {
+        stage2Btn.disabled = true;
+        stage2Btn.style.opacity = 0.5;
+        stage2Btn.style.cursor = "not-allowed";
+    }
+}
 
-
-
+  
 
 
 function sendScore() {
@@ -1522,6 +1556,7 @@ showTopPlayerName(); // قبل از gameLoop()
 </script>
 </body>
 </html>
+
 
 
 
