@@ -956,7 +956,26 @@ document.getElementById("showScoresBtn").addEventListener("click", ()=>{
 
 
 
+// هر بار که امتیاز بروزرسانی می‌شود، وضعیت دکمه را چک کن
+function checkStage2Availability() {
+    const stage2Btn = document.getElementById('loadStage2Btn');
 
+    if(totalScore >= 470){
+        stage2Btn.disabled = false;
+        stage2Btn.style.opacity = 1;  // تغییر ظاهر وقتی فعال شد
+        stage2Btn.style.cursor = "pointer";
+    } else {
+        stage2Btn.disabled = true;
+        stage2Btn.style.opacity = 0.5;  // ظاهر نیمه شفاف وقتی غیر فعال
+        stage2Btn.style.cursor = "not-allowed";
+    }
+}
+
+
+
+  
+}
+  
 
 
 
@@ -1026,6 +1045,7 @@ spawnFloat(displayText, fx, fy);
         ball.scored = false;
         if(turn >= maxTurns){
             showFinalScore();
+          checkStage2Availability();
             sendScore();
           
         }
@@ -1242,26 +1262,6 @@ function checkInternetAtStart() {
 
 // فراخوانی هنگام شروع بازی
 checkInternetAtStart();
-
-
-
-// تابع چک کردن و فعال کردن دکمه
-function checkStage2Availability() {
-    if(totalScore >= 400 || localStorage.getItem("stage2Unlocked") === "true") {
-        stage2Btn.style.opacity = 1;
-        stage2Btn.style.cursor = "pointer";
-
-        // ذخیره وضعیت برای مراجعات بعدی
-        localStorage.setItem("stage2Unlocked", "true");
-    } else {
-      alert("حداقل امتیاز جهت فعال‌سازی مرحله دوم 400 می‌باشد 🎯");
-        stage2Btn.disabled = true;
-        stage2Btn.style.opacity = 0.5;
-        stage2Btn.style.cursor = "not-allowed";
-    }
-}
-
-  
 
 
 function sendScore() {
@@ -1556,6 +1556,7 @@ showTopPlayerName(); // قبل از gameLoop()
 </script>
 </body>
 </html>
+
 
 
 
