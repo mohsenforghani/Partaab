@@ -838,19 +838,6 @@ canvas.addEventListener('pointerup', e=>{
 });
 
 
-const stage2Btn = document.getElementById('loadStage2Btn');
-
-stage2Btn.addEventListener('click', () => {
-    if (!stage2Btn.disabled) {
-        window.open('https://github.com/mohsenforghani/partaab-stage2/raw/main/index.html', '_blank');
-    } else {
-        alert("برای دسترسی به مرحله دوم، باید حداقل امتیاز 470 را بدست بیاورید.");
-    }
-});
-
-
-  
-
 
 // دکمه نمایش/مخفی کردن چت
 document.getElementById('toggleChatBtn').addEventListener('click', () => {
@@ -868,8 +855,17 @@ document.getElementById('toggleChatBtn').addEventListener('click', () => {
     }
 });
 
+const stage2Btn = document.getElementById('loadStage2Btn');
+stage2Btn.addEventListener('click', () => {
+    if (!stage2Btn.disabled) {
+        window.open('https://github.com/mohsenforghani/partaab-stage2/raw/main/index.html', '_blank');
+    } else {
+        alert("برای دسترسی به مرحله دوم، باید حداقل امتیاز 470 را بدست بیاورید.");
+    }
+});
 
 
+  
 
 document.getElementById("showScoresBtn").addEventListener("click", ()=>{
     const btn = document.getElementById("showScoresBtn");
@@ -977,9 +973,7 @@ function checkStage2Availability() {
 
 
 
-  
-}
-  
+
 
 
 
@@ -1560,6 +1554,7 @@ showTopPlayerName(); // قبل از gameLoop()
 </script>
 </body>
 </html>
+
 
 
 
