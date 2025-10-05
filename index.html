@@ -858,7 +858,7 @@ document.getElementById('toggleChatBtn').addEventListener('click', () => {
 const stage2Btn = document.getElementById('loadStage2Btn');
 stage2Btn.addEventListener('click', () => {
     if (!stage2Btn.disabled) {
-        window.open('https://github.com/mohsenforghani/partaab-stage2/raw/main/index.html', '_blank');
+        window.open('https://raw.githubusercontent.com/mohsenforghani/partaab2/refs/heads/main/index.html', '_blank');
     } else {
         alert("برای دسترسی به مرحله دوم، باید حداقل امتیاز 470 را بدست بیاورید.");
     }
@@ -960,7 +960,7 @@ document.getElementById("showScoresBtn").addEventListener("click", ()=>{
 function checkStage2Availability() {
     const stage2Btn = document.getElementById('loadStage2Btn');
 
-    if(totalScore >= 300){
+    if(totalScore >= 20){
         stage2Btn.disabled = false;
         stage2Btn.style.opacity = 1;  // تغییر ظاهر وقتی فعال شد
         stage2Btn.style.cursor = "pointer";
@@ -1554,6 +1554,7 @@ showTopPlayerName(); // قبل از gameLoop()
 </script>
 </body>
 </html>
+
 
 
 
