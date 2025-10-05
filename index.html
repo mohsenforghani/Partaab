@@ -626,7 +626,7 @@ canvas {
     border: none;
     border-radius: 5px;
     cursor: not-allowed; /* هنگام غیر فعال بودن */
-    opacity: 0.5;  /* هنگام غیر فعال بودن */
+    opacity: 0.9; 
     z-index: 10000;
 ">مرحله دوم</button>
 
@@ -858,8 +858,9 @@ document.getElementById('toggleChatBtn').addEventListener('click', () => {
 
 const stage2Btn = document.getElementById('loadStage2Btn');
 stage2Btn.addEventListener('click', () => {
-    if (totalScore >= 100) {
-        // بارگذاری محتوای HTML از گیت‌هاب
+    if (totalScore >= 400) {
+        stage2Btn.style.backgroundColor = "#4CAF50"; // رنگ سبز زمانی که امتیاز کافی است
+      // بارگذاری محتوای HTML از گیت‌هاب
         fetch('https://raw.githubusercontent.com/mohsenforghani/partaab2/refs/heads/main/index.html')
             .then(response => response.text())
             .then(html => {
@@ -867,13 +868,16 @@ stage2Btn.addEventListener('click', () => {
                 const newWindow = window.open('', '_blank');
                 newWindow.document.write(html);
                 newWindow.document.close();
+              
+               alert('به مرحله دوم بازی پرتاب آتشین خوش آمدید');
             })
             .catch(error => {
                 console.error('خطا در بارگذاری کد مرحله دوم:', error);
                 alert('مشکلی در بارگذاری مرحله دوم پیش آمده است.');
             });
     } else {
-        alert("برای دسترسی به مرحله دوم، باید حداقل امتیاز 470 را بدست بیاورید.");
+       stage2Btn.style.backgroundColor = "#FF5733"; // رنگ نارنجی زمانی که امتیاز کافی نیست
+        alert("برای دسترسی به مرحله دوم، باید حداقل 400 امتیاز بدست بیاورید.");
     }
 });
 
@@ -1553,6 +1557,7 @@ showTopPlayerName(); // قبل از gameLoop()
 </script>
 </body>
 </html>
+
 
 
 
