@@ -858,7 +858,7 @@ document.getElementById('toggleChatBtn').addEventListener('click', () => {
 
 const stage2Btn = document.getElementById('loadStage2Btn');
 stage2Btn.addEventListener('click', () => {
-    if (totalScore >= 400) {
+    if (totalScore >= 0) {
         stage2Btn.style.backgroundColor = "#4CAF50"; // رنگ سبز زمانی که امتیاز کافی است
       // بارگذاری محتوای HTML از گیت‌هاب
         fetch('https://raw.githubusercontent.com/mohsenforghani/partaab2/refs/heads/main/index.html')
@@ -877,7 +877,6 @@ stage2Btn.addEventListener('click', () => {
             });
     } else {
        stage2Btn.style.backgroundColor = "#FF5733"; // رنگ نارنجی زمانی که امتیاز کافی نیست
-        alert("برای دسترسی به مرحله دوم، باید حداقل 400 امتیاز بدست بیاورید.");
     }
 });
 
@@ -1557,6 +1556,7 @@ showTopPlayerName(); // قبل از gameLoop()
 </script>
 </body>
 </html>
+
 
 
 
