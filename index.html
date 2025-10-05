@@ -702,12 +702,6 @@ let turn = 0;
 const maxTurns = 5;
 let turnScores = [];
 
-let holdTime = 0;
-let maxHoldTime = 7; // حداکثر زمان نگه‌داشتن انگشت (ثانیه)
-let holding = false; // وضعیت نگه‌داشتن انگشت
-let ringRadius = ball.r + 10; // شعاع رینگ (اندازه اولیه)
-
-
 let resizeTapCount = 0;  // شمارنده ضربه برای ریسایز
 const tapsNeeded = 20;    // تعداد ضربه لازم برای ریسایز
   
@@ -809,48 +803,40 @@ function getTouchPos(e) {
 
 
 
-// هنگام شروع لمس (pointerdown)
-canvas.addEventListener('pointerdown', e => {
+
+
+canvas.addEventListener('pointerdown', e=>{
     e.preventDefault();
-    if (e.pointerType !== 'touch') return;
+if (e.pointerType !== 'touch' ) return;
 
-    // شروع نگه‌داشتن انگشت
-    if (!startTouch) {
-        startTouch = getTouchPos(e);
-        holding = true;  // انگشت نگه داشته شده است
-        holdStartTime = Date.now(); // ثبت زمان شروع نگه‌داشتن انگشت
+  // ===== بخش جدید: شمارنده ضربه برای ریسایز =====
+    resizeTapCount++;
+    if(resizeTapCount >= tapsNeeded){
+        resizeCanvas();       // فقط ریسایز کانواس
+        resizeTapCount = 0;   // ریست شمارنده
     }
-}, { passive: false });
+  
+    if(hasThrown || isMoving || turn >= maxTurns) return;
+    const pos = getTouchPos(e);
+    const dx = pos.x - ball.x;
+    const dy = pos.y - ball.y;
+    if(Math.sqrt(dx*dx + dy*dy) < ball.r){
+        startTouch = pos;
+    }
+},{passive:false});
 
-// هنگام حرکت انگشت (pointermove)
-canvas.addEventListener('pointermove', e => {
-    if (!holding) return;
-
-    // محاسبه زمان نگه‌داشتن انگشت
-    holdTime = (Date.now() - holdStartTime) / 1000;  // زمان به ثانیه
-    if (holdTime > 7) holdTime = 7;  // محدود کردن زمان به 7 ثانیه
-}, { passive: false });
-
-// هنگام قطع لمس (pointerup)
-canvas.addEventListener('pointerup', e => {
-    if (!holding) return;
-    holding = false;  // انگشت دیگر نگه‌داشته نمی‌شود
-
+canvas.addEventListener('pointerup', e=>{
+    if(!startTouch) return;
+    if(turn >= maxTurns) return;
     const endPos = getTouchPos(e);
     const dx = endPos.x - startTouch.x;
     const dy = endPos.y - startTouch.y;
-
-    // محاسبه سرعت توپ براساس مدت زمان نگه‌داشتن انگشت
-    const speedFactor = Math.min(holdTime / 7, 1);  // سرعت بر اساس زمان نگه‌داشتن انگشت
-    ball.vx = dx * speedFactor * 0.2;  // محاسبه سرعت X توپ
-    ball.vy = dy * speedFactor * 0.2;  // محاسبه سرعت Y توپ
-
+    ball.vx = dx*0.2;
+    ball.vy = dy*0.2;
     isMoving = true;
     hasThrown = true;
     startTouch = null;
 });
-
-
 
 
 
@@ -987,32 +973,6 @@ document.getElementById("showScoresBtn").addEventListener("click", ()=>{
 
 
 
-
-// رسم رینگ که به تدریج سبز می‌شود
-function drawRing() {
-    const ringProgress = Math.min(holdTime / maxHoldTime, 1); // محاسبه میزان پر شدن رینگ
-
-    // رسم رینگ خاکستری
-    ctx.beginPath();
-    ctx.arc(ball.x, ball.y, ringRadius, 0, Math.PI * 2);
-    ctx.strokeStyle = 'gray';
-    ctx.lineWidth = 5;
-    ctx.stroke();
-
-    // رسم رینگ سبز که به تدریج کامل می‌شود
-    ctx.beginPath();
-    ctx.arc(ball.x, ball.y, ringRadius, -Math.PI / 2, (Math.PI * 2 * ringProgress) - Math.PI / 2);
-    ctx.strokeStyle = 'green';
-    ctx.lineWidth = 5;
-    ctx.stroke();
-}
-
-// تنظیم قدرت ضربه و حرکت توپ
-function calculateSpeed() {
-    const speedFactor = Math.min(holdTime / maxHoldTime, 1); // سرعت بر اساس زمان نگه‌داشتن انگشت
-    ball.vx = speedFactor * 10; // مثال: سرعت توپ 0 تا 10
-    ball.vy = -speedFactor * 10; // توپ به سمت بالا پرتاب می‌شود
-}
 
 
 
@@ -1548,7 +1508,6 @@ function gameLoop(){
     update();
 updateBallLabel(ball)
     draw();
- drawRing();  // رسم رینگ
     requestAnimationFrame(gameLoop);
 }
 if(checkInternetAtStart()){
