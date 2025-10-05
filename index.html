@@ -713,7 +713,7 @@ let turnScores = [];
 
   
   let gameSound = document.getElementById('gameSound');
-let soundOver100 = document.getElementById('over100');
+  let soundOver100 = document.getElementById('over100');
   let soundScoreInGame = document.getElementById('soundScore');
 // وقتی بازی شروع می‌شود، صدا را پخش کن
 function startGame() {
@@ -725,9 +725,9 @@ function soundradshodan100() {
     soundOver100.play();       // پخش صدا
   soundOver100.loop = false; 
 }
-  function soundScoreInGame() {
-    soundScore.play();       // پخش صدا
-  soundScore.loop = false;   
+  function soundScoreInGaming() {
+    soundScoreInGame.play();       // پخش صدا
+  soundScoreInGame.loop = false;   
 }
 
   
@@ -1044,7 +1044,7 @@ function calculateScore(){
       soundradshodan100();
       score = 0;
     } else {
-        soundScoreInGame();
+        soundScoreInGaming();
         score = (canvas.height - ball.y) / canvas.height * 100; 
         score = parseFloat(score.toFixed(2));
     }
@@ -1582,12 +1582,4 @@ showTopPlayerName(); // قبل از gameLoop()
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
 
