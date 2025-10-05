@@ -1041,7 +1041,6 @@ function calculateScore(){
 
     let score;
     if(ball.y < 0){ 
-      soundradshodan100();
       score = 0;
     } else {
         soundScoreInGaming();
@@ -1247,7 +1246,9 @@ function updateBallLabel(ball) {
 
     // متن عدد کنار توپ: فقط عدد صحیح (رقم اعشار نداشته باشد)
     ballLabel.innerText = Math.floor((canvas.height - ball.y)/canvas.height*100);
-    
+    if(ball.y < 0){ 
+      soundradshodan100();
+    }
     // نمایش فقط وقتی توپ در حال حرکت است
     ballLabel.style.display = (isMoving || hasThrown) ? 'block' : 'none';
 }
@@ -1582,4 +1583,5 @@ showTopPlayerName(); // قبل از gameLoop()
 </script>
 </body>
 </html>
+
 
