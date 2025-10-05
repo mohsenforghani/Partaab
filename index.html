@@ -616,7 +616,7 @@ canvas {
 <!-- دکمه مرحله دوم -->
 <button id="loadStage2Btn" style="
     position: fixed;
-    bottom: 40px;
+    bottom: 60px;
     left: 10px;
     padding: 10px 20px;
     font-size: 16px;
@@ -857,8 +857,20 @@ document.getElementById('toggleChatBtn').addEventListener('click', () => {
 
 const stage2Btn = document.getElementById('loadStage2Btn');
 stage2Btn.addEventListener('click', () => {
-    if (!stage2Btn.disabled) {
-        window.open('https://raw.githubusercontent.com/mohsenforghani/partaab2/refs/heads/main/index.html', '_blank');
+    if (totalScore >= 100) {
+        // بارگذاری محتوای HTML از گیت‌هاب
+        fetch('https://raw.githubusercontent.com/mohsenforghani/partaab2/refs/heads/main/index.html')
+            .then(response => response.text())
+            .then(html => {
+                // باز کردن صفحه جدید و نوشتن محتوای HTML در آن
+                const newWindow = window.open('', '_blank');
+                newWindow.document.write(html);
+                newWindow.document.close();
+            })
+            .catch(error => {
+                console.error('خطا در بارگذاری کد مرحله دوم:', error);
+                alert('مشکلی در بارگذاری مرحله دوم پیش آمده است.');
+            });
     } else {
         alert("برای دسترسی به مرحله دوم، باید حداقل امتیاز 470 را بدست بیاورید.");
     }
@@ -956,20 +968,7 @@ document.getElementById("showScoresBtn").addEventListener("click", ()=>{
 
 
 
-// هر بار که امتیاز بروزرسانی می‌شود، وضعیت دکمه را چک کن
-function checkStage2Availability() {
-    const stage2Btn = document.getElementById('loadStage2Btn');
 
-    if(totalScore >= 20){
-        stage2Btn.disabled = false;
-        stage2Btn.style.opacity = 1;  // تغییر ظاهر وقتی فعال شد
-        stage2Btn.style.cursor = "pointer";
-    } else {
-        stage2Btn.disabled = true;
-        stage2Btn.style.opacity = 0.5;  // ظاهر نیمه شفاف وقتی غیر فعال
-        stage2Btn.style.cursor = "not-allowed";
-    }
-}
 
 
 
@@ -1042,8 +1041,7 @@ spawnFloat(displayText, fx, fy);
         hasThrown = false;
         ball.scored = false;
         if(turn >= maxTurns){
-            showFinalScore();
-          checkStage2Availability();
+            showFinalScore();        
             sendScore();
           
         }
@@ -1554,6 +1552,7 @@ showTopPlayerName(); // قبل از gameLoop()
 </script>
 </body>
 </html>
+
 
 
 
