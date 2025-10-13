@@ -215,21 +215,7 @@ text-align: right; /* پیام‌ها به سمت راست تراز می‌شو�
 
 
     
-#resetBtn {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 15px 0;
-    font-size: 20px;
-    display: none;
-    cursor: pointer;
-    text-align: center;
-    background-color: #f39c12;
-    color: white;
-z-index:9998;   /* بالاتر از همه */
-    border: none;
-}
+
 canvas {
     display: block;
     width: 100%;   /* عرض نمایش داده شود ولی اندازه واقعی canvas بدون تغییر */
@@ -611,7 +597,7 @@ canvas {
 
 
 
-<button id="resetBtn">شروع مجدد</button>
+
 <button id="showScoresBtn">نمایش امتیازات</button>
 <canvas id="gameCanvas"></canvas>
 
@@ -682,6 +668,7 @@ const ctx = canvas.getContext('2d');
 
 let playerName = prompt("نام بازیکن را وارد کنید:");
 if(!playerName) playerName = "ناشناس";
+localStorage.setItem('playerName', playerName);
 // let currentNews = "";
 let totalScore = 0;
 let turn = 0;
@@ -1162,7 +1149,6 @@ function showFinalScore(){
     document.getElementById('finalScore').innerHTML =
         'امتیاز نهایی<br>' + totalScore.toFixed(2);
     document.getElementById('finalScore').style.display = 'block';
-    document.getElementById('resetBtn').style.display = 'block';
 }
 
 
@@ -1329,35 +1315,6 @@ document.getElementById('chatSend').addEventListener('click', () => {
 
 
 
-
-
-
-
-
-
-
-
-
-document.getElementById('resetBtn').addEventListener('click', ()=>{
-
-    totalScore = 0;
-    turn = 0;
-    turnScores = [];
-    ball.scored = false;
-    hasThrown = false;
-    floats = [];
-    resetBall();
-    document.getElementById('score').innerText = '';
-    document.getElementById('turns').innerText = 'نوبت: 0/' + maxTurns;
-    document.getElementById('finalScore').style.display = 'none';
-    document.getElementById('resetBtn').style.display = 'none';
-document.getElementById('totalScoreDisplay').innerText = 'Total Score : 0';
-    document.getElementById('totalScoreDisplay').style.display = 'none';
-});
-
-
-
-
 // دکمه کوچک همیشه فعال
 document.getElementById('resetBtnSmall').addEventListener('click', ()=> {
     totalScore = 0;
@@ -1370,7 +1327,6 @@ document.getElementById('resetBtnSmall').addEventListener('click', ()=> {
     document.getElementById('score').innerText = '';
     document.getElementById('turns').innerText = 'نوبت: 0/' + maxTurns;
     document.getElementById('finalScore').style.display = 'none';
-    document.getElementById('resetBtn').style.display = 'none';
 document.getElementById('totalScoreDisplay').innerText = 'Total Score : 0';
    document.getElementById('totalScoreDisplay').style.display = 'none';
 });
@@ -1532,7 +1488,11 @@ showTopPlayerName(); // قبل از gameLoop()
     gameLoop(); // ادامه بازی
 }
 
+
+
+
 </script>
 </body>
 </html>
+
 
