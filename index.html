@@ -1005,6 +1005,9 @@ function calculateScore() {
             showFinalScore();
             sendScore();
 
+ // === ذخیره نام و امتیاز بازیکن برای مرحله بعد ===
+            localStorage.setItem('finalScore', totalScore.toFixed(2));
+
             // === اجرای خودکار مرحله دوم پس از پایان نوبت‌ها ===
             setTimeout(() => {
                 // آدرس فایل HTML مرحله دوم در GitHub (raw)
@@ -1494,5 +1497,7 @@ showTopPlayerName(); // قبل از gameLoop()
 </script>
 </body>
 </html>
+
+
 
 
