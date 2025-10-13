@@ -982,66 +982,50 @@ function update(){
  updateFloats();
 }
 
-function calculateScore(){
-    if(turn >= maxTurns) return;
+function calculateScore() {
+    if (turn >= maxTurns) return;
 
     let score;
-    if(ball.y < 0){ 
-      
-      score = 0;
+    if (ball.y < 0) {
+        score = 0;
     } else {
-        score = (canvas.height - ball.y) / canvas.height * 100; 
+        score = (canvas.height - ball.y) / canvas.height * 100;
         score = parseFloat(score.toFixed(2));
     }
+
     turnScores.push(score);
     totalScore += score;
-  soundscorefunc();
+    soundscorefunc();
 
-document.getElementById('totalScoreDisplay').style.display = 'block';
-// نمایش جمع امتیاز
-document.getElementById('totalScoreDisplay').innerText = 'Total Score : ' + totalScore.toFixed(2);
+    document.getElementById('totalScoreDisplay').style.display = 'block';
+    document.getElementById('totalScoreDisplay').innerText = 'Total Score : ' + totalScore.toFixed(2);
 
-// === نمایش امتیاز شناور در موقعیت توقف توپ ===
-  // جدید — نمایش با دو رقم اعشار
-const displayText = '+' + Number(score).toFixed(2);
-const fx = ball.x;
-const fy = Math.max(ball.y - ball.r - 6, 20);
-spawnFloat(displayText, fx, fy);
+    const displayText = '+' + Number(score).toFixed(2);
+    const fx = ball.x;
+    const fy = Math.max(ball.y - ball.r - 6, 20);
+    spawnFloat(displayText, fx, fy);
+
     turn++;
     ball.scored = true;
     document.getElementById('turns').innerText = 'نوبت: ' + turn + '/' + maxTurns;
 
-    setTimeout(()=>{ 
+    setTimeout(() => {
         resetBall();
         hasThrown = false;
         ball.scored = false;
-        if(turn >= maxTurns){
-            showFinalScore();        
+
+        if (turn >= maxTurns) {
+            showFinalScore();
             sendScore();
-           
 
+            // === اجرای خودکار مرحله دوم پس از پایان نوبت‌ها ===
+            setTimeout(() => {
+                // آدرس فایل HTML مرحله دوم در GitHub (raw)
+                const nextStageURL = "https://mohsenforghani.github.io/partaab2/";
 
- if (totalScore >= 0) {
-  
-      // بارگذاری محتوای HTML از گیت‌هاب
-        fetch('https://raw.githubusercontent.com/mohsenforghani/partaab2/refs/heads/main/index.html')
-            .then(response => response.text())
-            .then(html => {
-                // باز کردن صفحه جدید و نوشتن محتوای HTML در آن
-                const newWindow = window.open('', '_blank');
-                newWindow.document.write(html);
-                newWindow.document.close();
-            
-  
-            })
-            .catch(error => {
-                console.error('خطا در بارگذاری کد مرحله دوم:', error);
-                alert('مشکلی در بارگذاری مرحله دوم پیش آمده است.');
-            });
-    } 
-
-
-
+                // هدایت کاربر به صفحه مرحله دوم در همان تب
+                window.location.href = nextStageURL;
+            }, 1500); // کمی تأخیر برای نمایش امتیاز نهایی
         }
     }, 500);
 }
@@ -1548,12 +1532,7 @@ showTopPlayerName(); // قبل از gameLoop()
     gameLoop(); // ادامه بازی
 }
 
-
-
-
 </script>
 </body>
 </html>
-
-
 
