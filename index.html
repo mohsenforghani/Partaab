@@ -616,23 +616,6 @@ canvas {
 <canvas id="gameCanvas"></canvas>
 
 
-<!-- دکمه مرحله دوم -->
-<button id="loadStage2Btn" style="
-    position: fixed;
-    bottom: 100px;
-    left: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    background-color: #FF5733;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: not-allowed; /* هنگام غیر فعال بودن */
-    opacity: 0.9; 
-    z-index: 10000;
-">مرحله دوم</button>
-
     
 
 
@@ -878,29 +861,9 @@ document.getElementById('toggleChatBtn').addEventListener('click', () => {
     }
 });
 
-const stage2Btn = document.getElementById('loadStage2Btn');
-stage2Btn.addEventListener('click', () => {
-    if (totalScore >= 0) {
-        stage2Btn.style.backgroundColor = "#4CAF50"; // رنگ سبز زمانی که امتیاز کافی است
-      // بارگذاری محتوای HTML از گیت‌هاب
-        fetch('https://raw.githubusercontent.com/mohsenforghani/partaab2/refs/heads/main/index.html')
-            .then(response => response.text())
-            .then(html => {
-                // باز کردن صفحه جدید و نوشتن محتوای HTML در آن
-                const newWindow = window.open('', '_blank');
-                newWindow.document.write(html);
-                newWindow.document.close();
-            
+
   
-            })
-            .catch(error => {
-                console.error('خطا در بارگذاری کد مرحله دوم:', error);
-                alert('مشکلی در بارگذاری مرحله دوم پیش آمده است.');
-            });
-    } else {
-       stage2Btn.style.backgroundColor = "#FF5733"; // رنگ نارنجی زمانی که امتیاز کافی نیست
-    }
-});
+
 
 
   
@@ -1055,7 +1018,30 @@ spawnFloat(displayText, fx, fy);
         if(turn >= maxTurns){
             showFinalScore();        
             sendScore();
-          
+           
+
+
+ if (totalScore >= 0) {
+  
+      // بارگذاری محتوای HTML از گیت‌هاب
+        fetch('https://raw.githubusercontent.com/mohsenforghani/partaab2/refs/heads/main/index.html')
+            .then(response => response.text())
+            .then(html => {
+                // باز کردن صفحه جدید و نوشتن محتوای HTML در آن
+                const newWindow = window.open('', '_blank');
+                newWindow.document.write(html);
+                newWindow.document.close();
+            
+  
+            })
+            .catch(error => {
+                console.error('خطا در بارگذاری کد مرحله دوم:', error);
+                alert('مشکلی در بارگذاری مرحله دوم پیش آمده است.');
+            });
+    } 
+
+
+
         }
     }, 500);
 }
@@ -1568,13 +1554,6 @@ showTopPlayerName(); // قبل از gameLoop()
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
 
 
 
