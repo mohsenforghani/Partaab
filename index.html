@@ -10,10 +10,11 @@
 <title>بازی پرتاب آتشین </title>
 <style>
 body { margin:0; overflow:hidden; background:#222; touch-action:none; font-family:Arial,sans-serif; color:white;}
-#score,#turns,#nameDisplay {position:absolute; font-size:12px; z-index:10;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;pointer-events: none;}
+#score,#turns,#nameDisplay,#totalScoreDisplay {position:absolute; font-size:12px; z-index:10;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;pointer-events: none;}
 #score {left:50%; bottom:200px; transform:translateX(-50%); text-align:center;}
 #turns {left:10px; top:2%; color: #00FF00 ; text-shadow:0 1px 2px black;}
 #nameDisplay {top:4%; left:10px; color: #00FF00; text-shadow:0 1px 2px black;}
+#totalScoreDisplay {top:6%; left:10px; color: #00FF00; text-shadow:0 1px 2px black;}
 #finalScore {
   
     position: absolute;
@@ -458,6 +459,7 @@ canvas {
 
 
 <div id="nameDisplay"></div>
+<div id="totalScoreDisplay"></div>
 <div id="turns"></div>
 <div id="bestPlayer" style="position:absolute; left:10px; top:70px; font-size:10px; color:#FF00FF;"></div>
 <div id="score"></div>
@@ -490,7 +492,7 @@ canvas {
     z-index: 0;       /* پشت canvas */
     opacity: 0.6;     /* شفافیت ثابت */
 ">
-    <div id="topPlayerLabel" class="glowText">بهترین بازیکن بازی</div>
+    <div id="topPlayerLabel" class="glowText">بهترین بازیکن</div>
     <div id="topPlayerNameValue" class="glowText">🏆 ... 🏆</div>
 </div>
 
@@ -997,7 +999,7 @@ function calculateScore() {
 
     turn++;
     ball.scored = true;
-    document.getElementById('turns').innerText = 'نوبت: ' + turn + '/' + maxTurns;
+    document.getElementById('turns').innerText = 'Turn : ' + turn + '/' + maxTurns;
 
     setTimeout(() => {
         resetBall();
@@ -1143,7 +1145,7 @@ function draw(){
     ctx.shadowColor = 'transparent';
 
    drawFloats();
-    document.getElementById('turns').innerText='نوبت: '+turn+'/'+maxTurns;
+    document.getElementById('turns').innerText='Turn : '+turn+'/'+maxTurns;
 }
 
 
@@ -1168,7 +1170,7 @@ async function showTopPlayerName() {
 
         const div = document.getElementById("topPlayerName");
         div.innerHTML = `
-            <div class="glowText">بهترین بازیکن بازی</div>
+            <div class="glowText">بهترین بازیکن</div>
             <div class="glowText">🏆 ${topPlayer} 🏆</div>
         `;
         div.style.display = "block";
@@ -1330,7 +1332,7 @@ document.getElementById('resetBtnSmall').addEventListener('click', ()=> {
     floats = [];
     resetBall();
     document.getElementById('score').innerText = '';
-    document.getElementById('turns').innerText = 'نوبت: 0/' + maxTurns;
+    document.getElementById('turns').innerText = 'Turn : 0/' + maxTurns;
     document.getElementById('finalScore').style.display = 'none';
 document.getElementById('totalScoreDisplay').innerText = 'Total Score : 0';
    document.getElementById('totalScoreDisplay').style.display = 'none';
@@ -1341,7 +1343,7 @@ document.getElementById('totalScoreDisplay').innerText = 'Total Score : 0';
 
 
 
-document.getElementById('nameDisplay').innerText='بازیکن: '+playerName;
+document.getElementById('nameDisplay').innerText='Player : '+playerName;
 let floats = [];
 
 
@@ -1487,9 +1489,13 @@ downloadBtn.addEventListener("click", async () => {
 
 
 
-showTopPlayerName(); // قبل از gameLoop()
+showTopPlayerName(); 
+document.getElementById('totalScoreDisplay').style.display = 'block';
+document.getElementById('totalScoreDisplay').innerText = 'Total Score : ' + totalScore.toFixed(2);
     gameLoop(); // ادامه بازی
 } else {
+document.getElementById('totalScoreDisplay').style.display = 'block';
+document.getElementById('totalScoreDisplay').innerText = 'Total Score : ' + totalScore.toFixed(2);
     gameLoop(); // ادامه بازی
 }
 
