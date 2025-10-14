@@ -969,6 +969,9 @@ function update(){
  updateFloats();
 }
 
+
+
+
 function calculateScore() {
     if (turn >= maxTurns) return;
 
@@ -1006,8 +1009,7 @@ function calculateScore() {
             sendScore();
 
  // === ذخیره نام و امتیاز بازیکن برای مرحله بعد ===
-            localStorage.setItem('finalScore', totalScore.toFixed(2));
-
+            localStorage.setItem('totalScore', totalScore.toFixed(2));
             // === اجرای خودکار مرحله دوم پس از پایان نوبت‌ها ===
             setTimeout(() => {
                 // آدرس فایل HTML مرحله دوم در GitHub (raw)
