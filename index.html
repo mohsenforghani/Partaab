@@ -1072,6 +1072,7 @@ function calculateScore() {
 
  // === ذخیره نام و امتیاز بازیکن برای مرحله بعد ===
             localStorage.setItem('totalScore', totalScore.toFixed(2));
+            localStorage.setItem('remainingLives', lives);
             // === اجرای خودکار مرحله دوم پس از پایان نوبت‌ها ===
             setTimeout(() => {
                 // آدرس فایل HTML مرحله دوم در GitHub (raw)
@@ -1594,6 +1595,7 @@ document.getElementById('totalScoreDisplay').innerText = 'Total Score : ' + tota
 </script>
 </body>
 </html>
+
 
 
 
