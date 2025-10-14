@@ -14,7 +14,30 @@ body { margin:0; overflow:hidden; background:#222; touch-action:none; font-famil
 #score {left:50%; bottom:200px; transform:translateX(-50%); text-align:center;}
 #turns {left:10px; top:2%; color: #00FF00 ; text-shadow:0 1px 2px black;}
 #nameDisplay {top:4%; left:10px; color: #00FF00; text-shadow:0 1px 2px black;}
-#totalScoreDisplay {top:6%; left:10px; color: #00FF00; text-shadow:0 1px 2px black;}
+#totalScoreDisplay {top:6.3%; left:10px; color: #00FF00; text-shadow:0 1px 2px black;}
+
+#livesContainer {
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
+  font-size: 20px;
+  display: flex;
+  gap: 2px;
+  user-select: none;
+}
+
+.heart {
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.heart.lost {
+  color: #333;
+  transform: scale(0.8);
+  filter: grayscale(100%);
+}
+
+
+
 #finalScore {
   
     position: absolute;
@@ -460,6 +483,15 @@ canvas {
 
 <div id="nameDisplay"></div>
 <div id="totalScoreDisplay"></div>
+
+//جان
+<div id="livesContainer">
+  <span id="life1" class="heart">❤️</span>
+  <span id="life2" class="heart">❤️</span>
+  <span id="life3" class="heart">❤️</span>
+</div>
+
+
 <div id="turns"></div>
 <div id="bestPlayer" style="position:absolute; left:10px; top:70px; font-size:10px; color:#FF00FF;"></div>
 <div id="score"></div>
@@ -676,7 +708,7 @@ let totalScore = 0;
 let turn = 0;
 const maxTurns = 5;
 let turnScores = [];
-
+let lives = 3;
   
   let gameSound = document.getElementById('gameSound');
 let soundOver100 = document.getElementById('over100');
@@ -978,8 +1010,19 @@ function calculateScore() {
     if (turn >= maxTurns) return;
 
     let score;
-    if (ball.y < 0) {
+    if (ball.y < 0 && lives > 0) {
         score = 0;
+        lives--;
+ 
+// تغییر رنگ قلب‌ها
+        if (lives === 2) document.getElementById('life3').innerText = '🖤';
+        if (lives === 1) document.getElementById('life2').innerText = '🖤';
+        if (lives === 0) {
+            document.getElementById('life1').innerText = '🖤';
+         setTimeout(() => {   
+         alert('💀 Game Over!');
+               }, 1500);
+}
     } else {
         score = (canvas.height - ball.y) / canvas.height * 100;
         score = parseFloat(score.toFixed(2));
@@ -1341,7 +1384,7 @@ document.getElementById('resetBtnSmall').addEventListener('click', ()=> {
 
   setTimeout(() => {
                 // آدرس فایل HTML مرحله دوم در GitHub (raw)
-                const stageOneURL = "https://mohsenforghani.github.io/partaab/";
+                const stageOneURL = "https://mohsenforghani.github.io/partaab/index.html";
 
                 // هدایت کاربر به صفحه مرحله دوم در همان تب
                 window.location.href = stageOneURL;
